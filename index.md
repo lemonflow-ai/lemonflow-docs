@@ -1,5 +1,5 @@
 ---
-title: 🍋 Lemonflow.docs
+title: main
 layout: default
 ---
 

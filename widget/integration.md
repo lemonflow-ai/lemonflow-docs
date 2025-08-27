@@ -1,5 +1,5 @@
 ---
-title: .chat (widget) Integration Guide
+title: .chat (widget)
 layout: default
 ---
 
