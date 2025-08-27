@@ -115,7 +115,7 @@ window.addEventListener('message', function(event) {
 
 *This functionality is planned for a future release (v2.0.5) and is not yet active.*
 
-## 5. Accessibility
+## 4. Accessibility
 
 The Lemonflow Chat Widget is designed to be accessible and compliant with **WCAG 2.1 Level AA** standards.
 
