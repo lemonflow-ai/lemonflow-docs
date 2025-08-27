@@ -1,9 +1,11 @@
 ---
-title: 🍋 Documentation
+title: 🍋 Lemonflow.docs
 layout: default
 ---
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;450;500;600;700&display=swap');
+  
   h1 {
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-weight: 700 !important;
@@ -13,12 +15,29 @@ layout: default
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-variant-ligatures: normal !important;
+    -webkit-font-variant-ligatures: normal !important;
+  }
+  
+  .site-title {
+    font-family: 'Raleway', sans-serif !important;
+  }
+  
+  .site-title .lemon {
+    font-weight: 600 !important;
+  }
+  
+  .site-title .docs {
+    font-weight: 450 !important;
   }
   
   .docs, body {
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-weight: 450 !important;
     line-height: 1.7 !important;
+    font-variant-ligatures: normal !important;
+    -webkit-font-variant-ligatures: normal !important;
+    font-feature-settings: "liga" 1 !important;
   }
   
   .service-card {
@@ -100,35 +119,36 @@ layout: default
   }
   
   footer {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
-    color: #ffffff;
-    padding: 3rem 2rem 2rem 2rem;
-    margin-top: 5rem;
-    margin-left: -2rem;
-    margin-right: -2rem;
-    margin-bottom: -2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    color: #333;
+    padding: 4rem 2rem 2rem 2rem;
+    margin-top: 6rem;
     text-align: center;
     position: relative;
+    border-top: 1px solid #e0e0e0;
   }
   
   footer::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
+    top: -1px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
     background: linear-gradient(90deg, #1FB270 0%, #8fd3f4 100%);
+    border-radius: 2px;
   }
   
   .footer-link {
-    color: #ffffff !important;
+    color: #0066cc !important;
     text-decoration: none !important;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    border-bottom: 1px solid transparent;
   }
   
   .footer-link:hover {
     color: #1FB270 !important;
+    border-bottom-color: #1FB270;
   }
   
   .service-name {
@@ -242,38 +262,38 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
 </div>
 
 <footer>
-  <h2 style="font-size: 1.75rem; margin-bottom: 1rem; color: #ffffff; font-weight: 600;">
+  <h2 style="font-size: 1.75rem; margin-bottom: 1rem; color: #333; font-weight: 600;">
     Get Support
   </h2>
   
-  <p style="color: #b0b0b0; margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+  <p style="color: #666; margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
     Our technical team is ready to help with integration and support
   </p>
   
   <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 3rem;">
     <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📧 Email</strong>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📧 Email Support</strong>
       <a href="mailto:tech@lemonflow.ai" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">🌐 Website</strong>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">🌐 Main Website</strong>
       <a href="https://lemonflow.ai/" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📖 Docs</strong>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📖 Documentation</strong>
       <div style="margin-top: 0.25rem;">
         <a href="/" class="footer-link" style="font-size: 1.1rem;">Home</a>
-        <span style="color: #666; margin: 0 0.5rem;">•</span>
-        <a href="widget/integration" class="footer-link" style="font-size: 1.1rem;">Widget</a>
+        <span style="color: #999; margin: 0 0.5rem;">•</span>
+        <a href="widget/integration" class="footer-link" style="font-size: 1.1rem;">Widget Guide</a>
       </div>
     </div>
   </div>
   
-  <div style="padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+  <div style="padding-top: 2rem; border-top: 1px solid #e0e0e0;">
     <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #888;">
-      © 2025 <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600; color: #b0b0b0;">Lemonflow</span><span style="font-weight: 450; color: #b0b0b0;">.ai</span></span>
+      © 2025 <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600; color: #666;">Lemonflow</span><span style="font-weight: 450; color: #666;">.ai</span></span> • All rights reserved
     </p>
-    <p style="margin: 0.5rem 0; font-size: 0.85rem; color: #666;">
+    <p style="margin: 0.5rem 0; font-size: 0.85rem; color: #999;">
       Building the future of AI-powered customer service
     </p>
   </div>
