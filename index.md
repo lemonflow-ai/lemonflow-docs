@@ -102,7 +102,7 @@ layout: default
     display: inline-block;
     padding: 1rem 2rem;
     background: linear-gradient(135deg, #1FB270 0%, #17a060 100%);
-    color: #ffffff;
+    color: #ffffff !important;
     text-decoration: none;
     border-radius: 40px;
     font-weight: 600;
@@ -114,6 +114,14 @@ layout: default
   .cta-button:hover {
     background: linear-gradient(135deg, #17a060 0%, #1FB270 100%);
     box-shadow: 0 6px 20px rgba(31, 178, 112, 0.4);
+    font-weight: 700;
+    text-decoration: underline;
+    color: #ffffff !important;
+  }
+  
+  .button-wrapper {
+    text-align: center;
+    margin-top: 1.5rem;
   }
   
   footer {
@@ -194,7 +202,9 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <li>Full capabilities of the Lemonflow engine</li>
   </ul>
   
-  <a href="widget/integration" class="cta-button">View Integration Guide</a>
+  <div class="button-wrapper">
+    <a href="widget/integration" class="cta-button">View Integration Guide</a>
+  </div>
 </div>
 
 <div class="service-card">
