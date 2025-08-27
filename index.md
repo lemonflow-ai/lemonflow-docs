@@ -182,7 +182,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
 <h2 style="font-size: 2rem; margin: 3rem 0 2rem 0; color: #2c2c2c;">Technical Documentation</h2>
 
 <div class="service-card">
-  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
+  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a; display: flex; justify-content: space-between; align-items: center;">
     <span class="service-name">
       💬 <span class="name">.chat</span> <span class="type">(widget)</span>
     </span>
@@ -208,7 +208,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
 </div>
 
 <div class="service-card">
-  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
+  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a; display: flex; justify-content: space-between; align-items: center;">
     <span class="service-name">
       📱 <span class="name">.chat</span> <span class="type">(whatsapp)</span>
     </span>
@@ -232,7 +232,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
 </div>
 
 <div class="service-card">
-  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
+  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a; display: flex; justify-content: space-between; align-items: center;">
     <span class="service-name">
       📧 <span class="name">.email</span>
     </span>

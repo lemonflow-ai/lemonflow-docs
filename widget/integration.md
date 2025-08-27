@@ -173,9 +173,6 @@ layout: default
   }
 </style>
 
-<div class="back-nav">
-  <a href="../">← Back to Documentation Hub</a>
-</div>
 
 <h1 style="margin: 3rem 0 1.5rem 0;">
   <span style="display: block; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #1FB270 0%, #8fd3f4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Integration Guide</span>
