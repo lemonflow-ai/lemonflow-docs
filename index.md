@@ -5,10 +5,13 @@ title: 🍋 Lemonflow.docs
 <style>
   h1 {
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    font-size: 3rem !important;
     margin-bottom: 1.5rem !important;
-    color: #1a1a1a !important;
+    background: linear-gradient(135deg, #1FB270 0%, #8fd3f4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .docs, body {
@@ -19,17 +22,36 @@ title: 🍋 Lemonflow.docs
   
   .service-card {
     margin: 2.5rem 0;
-    padding: 2rem;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e8e8e8;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(31, 178, 112, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1FB270 0%, #8fd3f4 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s;
   }
   
   .service-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(31, 178, 112, 0.15);
+    border-color: rgba(31, 178, 112, 0.3);
+  }
+  
+  .service-card:hover::before {
+    transform: scaleX(1);
   }
   
   .status-badge {
@@ -42,8 +64,9 @@ title: 🍋 Lemonflow.docs
   }
   
   .status-available {
-    background: #e7f5e7;
-    color: #2e7d2e;
+    background: linear-gradient(135deg, #e7f5e7 0%, #d4f4dd 100%);
+    color: #1FB270;
+    font-weight: 600;
   }
   
   .status-coming {
@@ -58,54 +81,82 @@ title: 🍋 Lemonflow.docs
   
   .cta-button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #ffd700;
-    color: #1a1a1a;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #1FB270 0%, #17a060 100%);
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: background 0.2s;
-    margin-top: 1rem;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 12px rgba(31, 178, 112, 0.3);
   }
   
   .cta-button:hover {
-    background: #ffed4e;
+    background: linear-gradient(135deg, #17a060 0%, #1FB270 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(31, 178, 112, 0.4);
   }
   
   .contact-section {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 12px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 2.5rem;
+    border-radius: 20px;
     margin: 3rem 0 2rem 0;
     text-align: center;
+    border: 1px solid rgba(31, 178, 112, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .service-name {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  .service-name .dot {
+    font-weight: 450;
+    color: #8fd3f4;
+  }
+  
+  .service-name .name {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  .service-name .type {
+    font-weight: 400;
+    color: #666;
+    font-size: 0.9em;
   }
 </style>
 
 <div class="docs">
 
 <p style="font-size: 1.2rem; color: #4a4a4a; margin: 2rem 0; line-height: 1.8;">
-Welcome to the public documentation for <strong>Lemonflow.ai</strong> services. Here you'll find integration guides, API references, and troubleshooting information for all of our AI-powered customer service solutions.
+Welcome to the public documentation for <span style="font-family: 'Raleway', sans-serif;"><strong style="font-weight: 600;">Lemonflow</strong><span style="font-weight: 450;">.ai</span></span> services. Here you'll find integration guides, API references, and troubleshooting information for all of our AI-powered customer service solutions.
 </p>
 
 <h2 style="font-size: 2rem; margin: 3rem 0 2rem 0; color: #2c2c2c;">Available Services</h2>
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
-    💬 Chat Widget 
-    <span class="status-badge status-available">✅ Available</span>
+    <span class="service-name">
+      💬 <span class="dot">.</span><span class="name">chat</span> <span class="type">(widget)</span>
+    </span>
+    <span class="status-badge status-available">✅ Live</span>
   </h3>
   
-  <p style="color: #5a5a5a; margin-bottom: 1.5rem;">
-    Professional chat widget for websites with smart branding and accessibility features.
+  <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
+    Embed our intelligent AI chat assistant directly into your website. Seamlessly integrates with your brand, providing instant 24/7 customer support with human-like conversations powered by advanced LLMs.
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
-  <ul class="feature-list">
-    <li>WCAG 2.1 AA compliant accessibility</li>
-    <li>Smart brand color inheritance</li>
-    <li>Mobile responsive design</li>
-    <li>Keyboard navigation support</li>
-    <li>Real-time customer support</li>
+  <ul class="feature-list" style="color: #666; line-height: 1.8;">
+    <li>Automatically inherits your brand colors & styling</li>
+    <li>WCAG 2.1 AA accessibility compliant</li>
+    <li>Mobile-first responsive design</li>
+    <li>Sub-5 second response times</li>
+    <li>Multi-language support with auto-detection</li>
+    <li>Customizable AI personality & knowledge base</li>
   </ul>
   
   <a href="widget/integration" class="cta-button">📖 View Integration Guide</a>
@@ -113,21 +164,24 @@ Welcome to the public documentation for <strong>Lemonflow.ai</strong> services. 
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
-    📧 Email Responder
+    <span class="service-name">
+      📧 <span class="dot">.</span><span class="name">email</span>
+    </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
   </h3>
   
-  <p style="color: #5a5a5a; margin-bottom: 1.5rem;">
-    Automated email response system powered by Gemini 2.5 Pro for intelligent customer service.
+  <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
+    Transform your email support with AI that understands context, sentiment, and urgency. Our email assistant drafts personalized responses, categorizes inquiries, and seamlessly escalates complex issues to human agents.
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
-  <ul class="feature-list">
-    <li>Multi-language support</li>
-    <li>Intelligent email routing and categorization</li>
-    <li>Assessment integration</li>
-    <li>Automated response generation</li>
-    <li>Custom workflow management</li>
+  <ul class="feature-list" style="color: #666; line-height: 1.8;">
+    <li>Powered by Gemini 2.5 Pro for superior understanding</li>
+    <li>Smart inbox triage & priority detection</li>
+    <li>Contextual response generation with brand voice</li>
+    <li>Seamless CRM & helpdesk integration</li>
+    <li>Multi-language support with translation</li>
+    <li>Human-in-the-loop approval workflows</li>
   </ul>
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
@@ -137,21 +191,24 @@ Welcome to the public documentation for <strong>Lemonflow.ai</strong> services. 
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
-    📱 WhatsApp Integration
+    <span class="service-name">
+      📱 <span class="dot">.</span><span class="name">chat</span> <span class="type">(whatsapp)</span>
+    </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
   </h3>
   
-  <p style="color: #5a5a5a; margin-bottom: 1.5rem;">
-    WhatsApp Business API integration for seamless customer support via messaging.
+  <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
+    Meet your customers where they are. Deploy your AI assistant on WhatsApp to handle inquiries, bookings, and support tickets through the world's most popular messaging platform.
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
-  <ul class="feature-list">
-    <li>Rich messaging with media support</li>
-    <li>Automated response workflows</li>
-    <li>Business API integration</li>
-    <li>Multi-agent support</li>
-    <li>Message history and analytics</li>
+  <ul class="feature-list" style="color: #666; line-height: 1.8;">
+    <li>Official WhatsApp Business API integration</li>
+    <li>Rich media support (images, documents, voice notes)</li>
+    <li>Interactive buttons & quick replies</li>
+    <li>Conversation history & context retention</li>
+    <li>Automated appointment booking & confirmations</li>
+    <li>Real-time analytics & conversation insights</li>
   </ul>
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
@@ -169,11 +226,11 @@ Welcome to the public documentation for <strong>Lemonflow.ai</strong> services. 
   <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
     <div>
       <strong style="color: #3a3a3a;">📧 Technical Support</strong><br>
-      <a href="mailto:tech@lemonflow.ai" style="color: #0066cc; text-decoration: none;">tech@lemonflow.ai</a>
+      <a href="mailto:tech@lemonflow.ai" style="color: #0066cc; text-decoration: none; font-family: 'Raleway', sans-serif;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
       <strong style="color: #3a3a3a;">🌐 Website</strong><br>
-      <a href="https://lemonflow.ai/" style="color: #0066cc; text-decoration: none;">lemonflow.ai</a>
+      <a href="https://lemonflow.ai/" style="color: #0066cc; text-decoration: none; font-family: 'Raleway', sans-serif;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
       <strong style="color: #3a3a3a;">📚 Documentation</strong><br>
