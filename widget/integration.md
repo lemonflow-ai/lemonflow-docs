@@ -177,7 +177,7 @@ layout: default
   <a href="../">← Back to Documentation Hub</a>
 </div>
 
-# .chat Widget Integration Guide
+# <div><span style="font-size: 1.8rem; color: #333; font-weight: 600; display: block; margin-bottom: 0.5rem;">.chat Widget</span><span style="display: block;">Integration Guide</span></div>
 
 <p class="intro-text">
   This guide provides everything you need to integrate the Lemonflow.chat Widget into your website or mobile application with just two lines of code.

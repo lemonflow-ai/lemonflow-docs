@@ -186,7 +186,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <span class="service-name">
       💬 <span class="name">.chat</span> <span class="type">(widget)</span>
     </span>
-    <span class="status-badge status-available">✅ Live</span>
+    <span class="status-badge status-available">✅ Documentation up to date</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
@@ -212,7 +212,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <span class="service-name">
       📱 <span class="name">.chat</span> <span class="type">(whatsapp)</span>
     </span>
-    <span class="status-badge status-coming">🔄 Coming Soon</span>
+    <span class="status-badge status-coming">🔄 Documentation coming soon</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
@@ -236,7 +236,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <span class="service-name">
       📧 <span class="name">.email</span>
     </span>
-    <span class="status-badge status-coming">🔄 Coming Soon</span>
+    <span class="status-badge status-coming">🔄 Documentation coming soon</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
