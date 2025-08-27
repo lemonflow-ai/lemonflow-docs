@@ -138,7 +138,7 @@ layout: default
     padding: 1rem 1.5rem;
     border-top: 1px solid #e0e0e0;
     color: #666;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.6;
   }
   
@@ -243,6 +243,8 @@ This example places a smaller widget in the bottom-left corner, enables the laun
     greeting="How can I help?"
     feedback-mode="csat">
 </lemonflow-chat>
+
+<script src="https://chat.lemonflow.ai/widget.js" async></script>
 ```
 
 <div style="background: linear-gradient(135deg, #e7f5e7 0%, #d4f4dd 100%); border: 2px solid #1FB270; padding: 2rem; margin: 3rem 0; border-radius: 12px; text-align: center;">
@@ -297,20 +299,12 @@ window.addEventListener('message', function(event) {
 
 ### Events Sent by the Widget
 
-#### `chat:ready`
-Fired when the widget has successfully initialized and is ready to accept messages.
-
-#### `chat:ended`  
-Fired when the chat session is terminated by the user, agent, or inactivity timeout.
-- **`data.reason`** (string): A brief description of why the chat ended
-
-#### `chat:error`
-Fired if a critical error occurs within the widget.
-- **`data.error`** (string): A description of the error
-
-#### `chat:resize`
-Fired whenever the internal content height changes, allowing dynamic iframe adjustments.
-- **`data.height`** (number): The new required height in pixels
+| Event | Description | Data Properties |
+| :---- | :---------- | :-------------- |
+| `chat:ready` | Widget successfully initialized and ready to accept messages | - |
+| `chat:ended` | Chat session terminated by user, agent, or timeout | `data.reason` (string): Why the chat ended |
+| `chat:error` | Critical error occurred within the widget | `data.error` (string): Error description |
+| `chat:resize` | Internal content height changed | `data.height` (number): New height in pixels |
 
 <div class="note-box">
   <strong>Coming Soon:</strong> Sending commands to the widget is planned for v2.0.5 and is not yet available.
@@ -363,4 +357,3 @@ When pressing Tab, focus moves through elements in this order:
 ### High Contrast Support
 
 The widget automatically adapts to system high contrast settings and maintains sufficient color contrast ratios for all text and interactive elements, ensuring readability for users with visual impairments.
-
