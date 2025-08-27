@@ -1,17 +1,16 @@
-title: 🍋 Lemonflow AI Documentation
-description: Comprehensive documentation for Lemonflow AI services
+title: Lemonflow.ai Docs
+description: Comprehensive documentation for Lemonflow.ai services
 theme: minima
 url: "https://lemonflow-ai.github.io"
 baseurl: "/lemonflow-docs"
 
 # Site settings
-author: Lemonflow AI
+author: Lemonflow.ai
 email: tech@lemonflow.ai
 website: https://lemonflow.ai
 
 # Navigation structure
 header_pages:
-  - index.md
   - widget/integration.md
 
 # SEO

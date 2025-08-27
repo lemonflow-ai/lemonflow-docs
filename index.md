@@ -1,5 +1,6 @@
 ---
-title: 🍋 Lemonflow.docs
+title: 🍋 Documentation
+layout: default
 ---
 
 <style>
@@ -98,14 +99,36 @@ title: 🍋 Lemonflow.docs
     box-shadow: 0 6px 20px rgba(31, 178, 112, 0.4);
   }
   
-  .contact-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    padding: 2.5rem;
-    border-radius: 20px;
-    margin: 3rem 0 2rem 0;
+  footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    color: #ffffff;
+    padding: 3rem 2rem 2rem 2rem;
+    margin-top: 5rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -2rem;
     text-align: center;
-    border: 1px solid rgba(31, 178, 112, 0.1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+  
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1FB270 0%, #8fd3f4 100%);
+  }
+  
+  .footer-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: color 0.3s;
+  }
+  
+  .footer-link:hover {
+    color: #1FB270 !important;
   }
   
   .service-name {
@@ -216,31 +239,42 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
   </p>
 </div>
 
-<div class="contact-section">
-  <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; color: #2c2c2c;">Need Help?</h2>
+</div>
+
+<footer>
+  <h2 style="font-size: 1.75rem; margin-bottom: 1rem; color: #ffffff; font-weight: 600;">
+    Get Support
+  </h2>
   
-  <p style="color: #5a5a5a; margin-bottom: 2rem;">
-    Our technical team is here to assist with integration questions and troubleshooting.
+  <p style="color: #b0b0b0; margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+    Our technical team is ready to help with integration and support
   </p>
   
-  <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+  <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 3rem;">
     <div>
-      <strong style="color: #3a3a3a;">📧 Technical Support</strong><br>
-      <a href="mailto:tech@lemonflow.ai" style="color: #0066cc; text-decoration: none; font-family: 'Raleway', sans-serif;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📧 Email</strong>
+      <a href="mailto:tech@lemonflow.ai" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
-      <strong style="color: #3a3a3a;">🌐 Website</strong><br>
-      <a href="https://lemonflow.ai/" style="color: #0066cc; text-decoration: none; font-family: 'Raleway', sans-serif;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">🌐 Website</strong>
+      <a href="https://lemonflow.ai/" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
     </div>
     <div>
-      <strong style="color: #3a3a3a;">📚 Documentation</strong><br>
-      <span style="color: #666;">You're already here!</span>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📖 Docs</strong>
+      <div style="margin-top: 0.25rem;">
+        <a href="/" class="footer-link" style="font-size: 1.1rem;">Home</a>
+        <span style="color: #666; margin: 0 0.5rem;">•</span>
+        <a href="widget/integration" class="footer-link" style="font-size: 1.1rem;">Widget</a>
+      </div>
     </div>
   </div>
-</div>
-
-<div style="text-align: center; color: #888; font-size: 0.875rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
-  <p style="margin: 0;"><em>Last updated: August 2025</em></p>
-</div>
-
-</div>
+  
+  <div style="padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #888;">
+      © 2025 <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600; color: #b0b0b0;">Lemonflow</span><span style="font-weight: 450; color: #b0b0b0;">.ai</span></span>
+    </p>
+    <p style="margin: 0.5rem 0; font-size: 0.85rem; color: #666;">
+      Building the future of AI-powered customer service
+    </p>
+  </div>
+</footer>
