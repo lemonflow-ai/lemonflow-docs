@@ -10,26 +10,43 @@
   </main>
   
   <!-- Custom Footer -->
-  <footer class="site-footer">
-    <div class="wrapper">
-      <div class="footer-content">
-        <div class="contact-info">
-          <h3>Get Support</h3>
-          <p>
-            <strong>Technical Support:</strong> 
-            <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a>
-          </p>
-          <p>
-            <strong>Main Website:</strong> 
-            <a href="https://lemonflow.ai/" target="_blank">lemonflow.ai</a>
-          </p>
-        </div>
-        <div class="company-info">
-          <p>&copy; {{ 'now' | date: "%Y" }} Lemonflow AI. All rights reserved.</p>
-        </div>
+<footer>
+  <h2 style="font-size: 1.75rem; margin-bottom: 1rem; color: #333; font-weight: 600;">
+    Get Support
+  </h2>
+  
+  <p style="color: #666; margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+    Our technical team is ready to help with integration and support
+  </p>
+  
+  <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 3rem;">
+    <div>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📧 Email Support</strong>
+      <a href="mailto:tech@lemonflow.ai" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
+    </div>
+    <div>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">🌐 Main Website</strong>
+      <a href="https://lemonflow.ai/" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
+    </div>
+    <div>
+      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📖 Documentation</strong>
+      <div style="margin-top: 0.25rem;">
+        <a href="/" class="footer-link" style="font-size: 1.1rem;">Home</a>
+        <span style="color: #999; margin: 0 0.5rem;">•</span>
+        <a href="widget/integration" class="footer-link" style="font-size: 1.1rem;">Widget Guide</a>
       </div>
     </div>
-  </footer>
+  </div>
+  
+  <div style="padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #888;">
+      © 2025 <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600; color: #666;">Lemonflow</span><span style="font-weight: 450; color: #666;">.ai</span></span> • All rights reserved
+    </p>
+    <p style="margin: 0.5rem 0; font-size: 0.85rem; color: #999;">
+      Building the future of AI-powered customer service
+    </p>
+  </div>
+</footer>
   
   {%- include google-analytics.html -%}
 </body>

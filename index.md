@@ -1,5 +1,5 @@
 ---
-title: 🍋 <b>Lemonflow</b>.docs
+title: 🍋 Lemonflow.docs
 layout: default
 ---
 
@@ -153,11 +153,6 @@ layout: default
     font-family: 'Raleway', sans-serif;
   }
   
-  .service-name .dot {
-    font-weight: 450;
-    color: #1a1a1a;
-  }
-  
   .service-name .name {
     font-weight: 600;
     color: #1a1a1a;
@@ -173,46 +168,45 @@ layout: default
 <div class="docs">
 
 <p style="font-size: 1.2rem; color: #4a4a4a; margin: 2rem 0; line-height: 1.8;">
-Welcome to the public documentation for <span style="font-family: 'Raleway', sans-serif;"><strong style="font-weight: 600;">Lemonflow</strong><span style="font-weight: 450;">.ai</span></span> services. Here you'll find integration guides, API references, and troubleshooting information for all of our AI-powered customer service solutions.
+Welcome to the public documentation for Lemonflow.ai services. Here you'll find integration guides, API references, and troubleshooting information for all of our AI-powered customer service solutions.
 </p>
 
-<h2 style="font-size: 2rem; margin: 3rem 0 2rem 0; color: #2c2c2c;">Available Services</h2>
+<h2 style="font-size: 2rem; margin: 3rem 0 2rem 0; color: #2c2c2c;">Technical Documentation</h2>
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
     <span class="service-name">
-      💬 <span class="dot">.</span><span class="name">chat</span> <span class="type">(widget)</span>
+      💬 <span class="name">.chat</span> <span class="type">(widget)</span>
     </span>
     <span class="status-badge status-available">✅ Live</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
-    Embed our intelligent AI chat assistant directly into your website. Seamlessly integrates with your brand, providing instant 24/7 customer support with human-like conversations powered by advanced LLMs.
+    Embed our intelligent AI engine directly into your website or mobile application. Seamlessly integrates with your brand, providing instant 24/7 customer support with remote actions. 
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
   <ul class="feature-list" style="color: #666; line-height: 1.8;">
-    <li>Automatically inherits your brand colors & styling</li>
-    <li>WCAG 2.1 AA accessibility compliant</li>
+    <li>Simple integration, only 2 lines of HTML code required</li>
     <li>Mobile-first responsive design</li>
-    <li>Sub-5 second response times</li>
-    <li>Multi-language support with auto-detection</li>
-    <li>Customizable AI personality & knowledge base</li>
+    <li>Automatically inherits your brand colors & styling</li>
+    <li>Accessiblity compliant (WCAG 2.1 AA)</li>
+    <li>Full capabilities of the Lemonflow engine</li>
   </ul>
   
-  <a href="widget/integration" class="cta-button">📖 View Integration Guide</a>
+  <a href="widget/integration" class="cta-button">View Integration Guide</a>
 </div>
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
     <span class="service-name">
-      📱 <span class="dot">.</span><span class="name">chat</span> <span class="type">(whatsapp)</span>
+      📱 <span class="name">.chat</span> <span class="type">(whatsapp)</span>
     </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
-    Meet your customers where they are. Deploy your AI assistant on WhatsApp to handle inquiries, bookings, and support tickets through the world's most popular messaging platform.
+    Meet your customers where they are. Deploy our intelligent AI engine directly from within WhatsApp.
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
@@ -220,32 +214,27 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
     <li>Official WhatsApp Business API integration</li>
     <li>Rich media support (images, documents, voice notes)</li>
     <li>Interactive buttons & quick replies</li>
-    <li>Conversation history & context retention</li>
-    <li>Automated appointment booking & confirmations</li>
-    <li>Real-time analytics & conversation insights</li>
   </ul>
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
-    Documentation in development - Expected Q2 2025
+    Documentation in development - Expected Q4 2025
   </p>
 </div>
 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
     <span class="service-name">
-      📧 <span class="dot">.</span><span class="name">email</span>
+      📧 </span><span class="name">.email</span>
     </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
   </h3>
   
   <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
-    Transform your email support with AI that understands context, sentiment, and urgency. Our email assistant drafts personalized responses, categorizes inquiries, and seamlessly escalates complex issues to human agents.
+    Transform your email support with AI that understands context and urgency. Our email assistant drafts personalized responses, categorizes inquiries, and seamlessly escalates complex issues.
   </p>
   
   <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
   <ul class="feature-list" style="color: #666; line-height: 1.8;">
-    <li>Powered by Gemini 2.5 Pro for superior understanding</li>
-    <li>Smart inbox triage & priority detection</li>
     <li>Contextual response generation with brand voice</li>
     <li>Seamless CRM & helpdesk integration</li>
     <li>Multi-language support with translation</li>
@@ -253,46 +242,8 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
   </ul>
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
-    Documentation in development - Expected Q1 2025
+    Documentation in development - Expected Q4 2025
   </p>
 </div>
 
 </div>
-
-<footer>
-  <h2 style="font-size: 1.75rem; margin-bottom: 1rem; color: #333; font-weight: 600;">
-    Get Support
-  </h2>
-  
-  <p style="color: #666; margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
-    Our technical team is ready to help with integration and support
-  </p>
-  
-  <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 3rem;">
-    <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📧 Email Support</strong>
-      <a href="mailto:tech@lemonflow.ai" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;">tech@<span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
-    </div>
-    <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">🌐 Main Website</strong>
-      <a href="https://lemonflow.ai/" class="footer-link" style="font-family: 'Raleway', sans-serif; font-size: 1.1rem;"><span style="font-weight: 600;">lemonflow</span><span style="font-weight: 450;">.ai</span></a>
-    </div>
-    <div>
-      <strong style="color: #1FB270; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">📖 Documentation</strong>
-      <div style="margin-top: 0.25rem;">
-        <a href="/" class="footer-link" style="font-size: 1.1rem;">Home</a>
-        <span style="color: #999; margin: 0 0.5rem;">•</span>
-        <a href="widget/integration" class="footer-link" style="font-size: 1.1rem;">Widget Guide</a>
-      </div>
-    </div>
-  </div>
-  
-  <div style="padding-top: 2rem; border-top: 1px solid #e0e0e0;">
-    <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #888;">
-      © 2025 <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600; color: #666;">Lemonflow</span><span style="font-weight: 450; color: #666;">.ai</span></span> • All rights reserved
-    </p>
-    <p style="margin: 0.5rem 0; font-size: 0.85rem; color: #999;">
-      Building the future of AI-powered customer service
-    </p>
-  </div>
-</footer>
