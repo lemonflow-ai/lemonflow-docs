@@ -185,7 +185,7 @@ layout: default
 </h1>
 
 <p class="intro-text">
-  This guide provides everything you need to integrate the Lemonflow.chat Widget into your website or mobile application with just two lines of code.
+  This guide provides everything you need to integrate the Lemonflow.chat widget into your website or mobile application with just two lines of code.
 </p>
 
 ## 1. Basic Integration
