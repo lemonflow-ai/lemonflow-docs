@@ -175,6 +175,10 @@ layout: default
 
 <div class="docs">
 
+<h1 style="margin: 3rem 0 1.5rem 0;">
+  <span style="display: block; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #1FB270 0%, #8fd3f4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Overview of Technical Documentation</span>
+</h1>
+
 <p style="font-size: 1.2rem; color: #4a4a4a; margin: 2rem 0; line-height: 1.8;">
 Welcome to the public documentation for Lemonflow.ai services. Here you'll find integration guides, API references, and troubleshooting information for all of our AI-powered customer service solutions.
 </p>

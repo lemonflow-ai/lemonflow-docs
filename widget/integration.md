@@ -37,6 +37,11 @@ layout: default
     border-top: 2px solid #f0f0f0;
   }
   
+  h2:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  
   h3 {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -247,8 +252,6 @@ This example places a smaller widget in the bottom-left corner, enables the laun
     Your AI assistant is now ready to help your customers 24/7.
   </p>
 </div>
-
-<hr class="section-divider">
 
 # Advanced Developer Options
 
