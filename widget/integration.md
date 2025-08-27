@@ -177,17 +177,15 @@ layout: default
   <a href="../">← Back to Documentation Hub</a>
 </div>
 
-# <span style="font-weight: 600;">Chat Widget</span> Integration Guide
+# .chat Widget Integration Guide
 
 <p class="intro-text">
-  This guide provides everything you need to integrate the <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600;">Lemonflow</span><span style="font-weight: 450;">.ai</span></span> Chat Widget into your website with just two lines of code.
+  This guide provides everything you need to integrate the Lemonflow.chat Widget into your website or mobile application with just two lines of code.
 </p>
-
-<hr class="section-divider">
 
 ## 1. Basic Integration
 
-To add the chat widget to your site, place the following two lines of code just before the closing `</body>` tag of your HTML page.
+To add the chat widget to your website or mobile application, place the following two lines of code just before the closing `</body>` tag of your HTML page.
 
 ```html
 <!-- Add this custom element where you want the widget to be anchored -->
@@ -197,7 +195,7 @@ To add the chat widget to your site, place the following two lines of code just 
 </lemonflow-chat>
 
 <!-- Add this script tag to load the widget -->
-<script src="https://staging-chat-57182386284.europe-west4.run.app/widget.js" async></script>
+<script src="https://chat.lemonflow.ai/widget.js" async></script>
 ```
 
 <div class="note-box">
@@ -351,10 +349,3 @@ When pressing Tab, focus moves through elements in this order:
 
 The widget automatically adapts to system high contrast settings and maintains sufficient color contrast ratios for all text and interactive elements, ensuring readability for users with visual impairments.
 
-<hr class="section-divider">
-
-<div style="text-align: center; margin-top: 4rem; padding: 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border: 1px solid #e0e0e0;">
-  <h3 style="margin-top: 0;">Need Help with Integration?</h3>
-  <p style="color: #666; margin-bottom: 1.5rem;">Our technical team is ready to assist you with any questions or issues.</p>
-  <a href="mailto:tech@lemonflow.ai" style="display: inline-block; padding: 0.75rem 2rem; background: linear-gradient(135deg, #1FB270 0%, #17a060 100%); color: white; text-decoration: none; border-radius: 40px; font-weight: 600; transition: all 0.3s;">Contact Support</a>
-</div>
