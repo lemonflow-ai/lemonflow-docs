@@ -1,3 +1,28 @@
-title: 🍋 Lemonflow Widget Documentation
+title: 🍋 Lemonflow AI Documentation
+description: Comprehensive documentation for Lemonflow AI services
 theme: minima
-description: Official integration guide for the Lemonflow Chat Widget
+url: "https://lemonflow-ai.github.io"
+baseurl: "/lemonflow-docs"
+
+# Site settings
+author: Lemonflow AI
+email: tech@lemonflow.ai
+website: https://lemonflow.ai
+
+# Navigation structure
+header_pages:
+  - index.md
+  - widget/integration.md
+
+# SEO
+lang: en
+tagline: AI-powered customer service solutions
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Social
+github_username: lemonflow-ai

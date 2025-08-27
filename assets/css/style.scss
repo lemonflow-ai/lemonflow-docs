@@ -1,0 +1,102 @@
+---
+---
+@import "minima";
+
+// Custom footer styles
+.site-footer {
+  background-color: #f8f9fa;
+  border-top: 2px solid #1FB270;
+  padding: 2rem 0 1rem 0;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.contact-info h3 {
+  color: #1FB270;
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  margin-bottom: 0.5rem;
+}
+
+.contact-info a {
+  color: #1FB270;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.company-info {
+  text-align: right;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+// Service cards styling
+.service-card {
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.service-card h3 {
+  color: #1FB270;
+  margin-top: 0;
+}
+
+.service-card .status {
+  background: #f0f8f0;
+  color: #2d8a3e;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.service-card .status.coming-soon {
+  background: #fff3cd;
+  color: #856404;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .company-info {
+    text-align: center;
+  }
+}
+
+// Breadcrumb navigation
+.breadcrumb {
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: #1FB270;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}

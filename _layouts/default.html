@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+{%- include head.html -%}
+<body>
+  {%- include header.html -%}
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      {{ content }}
+    </div>
+  </main>
+  
+  <!-- Custom Footer -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <div class="footer-content">
+        <div class="contact-info">
+          <h3>Get Support</h3>
+          <p>
+            <strong>Technical Support:</strong> 
+            <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a>
+          </p>
+          <p>
+            <strong>Main Website:</strong> 
+            <a href="https://lemonflow.ai/" target="_blank">lemonflow.ai</a>
+          </p>
+        </div>
+        <div class="company-info">
+          <p>&copy; {{ 'now' | date: "%Y" }} Lemonflow AI. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  {%- include google-analytics.html -%}
+</body>
+</html>
