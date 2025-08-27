@@ -224,7 +224,7 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
     <span class="service-name">
-      📧 </span><span class="name">.email</span>
+      📧 <span class="name">.email</span>
     </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
   </h3>
@@ -237,8 +237,9 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
   <ul class="feature-list" style="color: #666; line-height: 1.8;">
     <li>Contextual response generation with brand voice</li>
     <li>Seamless CRM & helpdesk integration</li>
-    <li>Multi-language support with translation</li>
     <li>Human-in-the-loop approval workflows</li>
+    <li>Multi-language support with translation</li>
+    <li>Smart attachement handling</li>
   </ul>
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
