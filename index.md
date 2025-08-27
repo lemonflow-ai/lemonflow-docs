@@ -1,12 +1,4 @@
-# 🍋 Lemonflow.chat > Integration guide for widget
-
-<p align="center">
-  Implementation guide for <a href="https://lemonflow.ai" target="_blank">lemonflow.</a>chat widget.
-</p>
-
----
-
-# Integration Guide
+# 🍋 Lemonflow Widget Integration Guide
 
 This guide provides everything you need to integrate the Lemonflow Chat Widget into your website.
 
