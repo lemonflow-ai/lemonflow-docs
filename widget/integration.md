@@ -1,5 +1,5 @@
 ---
-title: .chat Widget Integration Guide
+title: .chat (widget) Integration Guide
 layout: default
 ---
 
@@ -171,36 +171,6 @@ layout: default
     margin: 4rem 0;
     border: none;
   }
-  
-  .step-number {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #1FB270 0%, #17a060 100%);
-    color: white;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-right: 1rem;
-  }
-  
-  .success-box {
-    background: linear-gradient(135deg, #e7f5e7 0%, #d4f4dd 100%);
-    border: 2px solid #1FB270;
-    padding: 2rem;
-    margin: 3rem 0;
-    border-radius: 12px;
-    text-align: center;
-  }
-  
-  .success-box h2 {
-    color: #1FB270;
-    margin-top: 0;
-    border-top: none;
-    padding-top: 0;
-  }
 </style>
 
 <div class="back-nav">
@@ -210,24 +180,12 @@ layout: default
 # .chat Widget Integration Guide
 
 <p class="intro-text">
-  Get the <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600;">Lemonflow</span><span style="font-weight: 450;">.chat</span></span> Widget running on your website or mobile application in just 3 simple steps.
+  This guide provides everything you need to integrate the Lemonflow.chat Widget into your website or mobile application with just two lines of code.
 </p>
 
-<hr class="section-divider">
+## 1. Basic Integration
 
-## <span class="step-number">1</span> Get Your Credentials
-
-Contact our team at [tech@lemonflow.ai](mailto:tech@lemonflow.ai) to receive your unique:
-- **Company ID** - Your unique identifier
-- **Public Key** - Your authentication key
-
-<div class="note-box">
-  <strong>Note:</strong> Keep your credentials secure and never commit them to public repositories.
-</div>
-
-## <span class="step-number">2</span> Add the Widget Code
-
-Place these two lines of code just before the closing `</body>` tag of your HTML page:
+To add the chat widget to your website or mobile application, place the following two lines of code just before the closing `</body>` tag of your HTML page.
 
 ```html
 <!-- Add this custom element where you want the widget to be anchored -->
@@ -240,51 +198,34 @@ Place these two lines of code just before the closing `</body>` tag of your HTML
 <script src="https://chat.lemonflow.ai/widget.js" async></script>
 ```
 
-## <span class="step-number">3</span> Replace Your Credentials
-
-Replace the placeholder values with your actual credentials:
-- Change `YOUR_COMPANY_ID` to your company ID
-- Change `YOUR_PUBLIC_KEY` to your public key
-
-<div class="success-box">
-  <h2>🎉 That's it!</h2>
-  <p style="font-size: 1.1rem; color: #333; margin: 0;">
-    You've successfully integrated the <strong>Lemonflow.chat</strong> widget.<br>
-    Your AI assistant is now ready to help your customers 24/7.
-  </p>
+<div class="note-box">
+  <strong>Important:</strong> Replace <code>YOUR_COMPANY_ID</code> and <code>YOUR_PUBLIC_KEY</code> with the credentials provided to you by Lemonflow.
 </div>
 
-<hr class="section-divider">
+## 2. Customization Options
 
-# Advanced Configuration
+You can customize the widget's appearance and position by adding attributes to the `<lemonflow-chat>` element.
 
-For developers who want to customize the widget further or integrate with their application.
+### Available Attributes
 
-## Customization Options
+| Attribute    | Description                                                                 | Default          | Example Values                  |
+| :----------- | :-------------------------------------------------------------------------- | :--------------- | :------------------------------ |
+| `company`    | **Required** - Your unique company identifier                               | -                | `"my-company"`                  |
+| `public-key` | **Required** - Your public API key for authentication                       | -                | `"pk_lemonflow_..."`            |
+| `position`   | Corner of the screen where the widget will be fixed                         | `"bottom-right"` | `"bottom-right"`, `"bottom-left"` |
+| `width`      | Width of the chat widget                                                    | `"400px"`        | `"350px"`, `"50%"`              |
+| `height`     | Height of the chat widget                                                   | `"400px"`        | `"550px"`, `"80vh"`             |
+| `z-index`    | Stack order of the widget (increase if hidden behind content)               | `"9999"`         | `"10000"`                       |
+| `launcher`   | Enables bubble launcher mode                                                | disabled         | `"enabled"`                     |
+| `greeting`   | Text displayed next to the launcher bubble                                  | `"Need help?"`   | `"Chat with us!"`               |
+| `branding-mode` | Controls the widget's visual theme                                       | `"lemonflow"`    | `"lemonflow"`, `"inherit"`      |
+| `feedback-mode` | Type of feedback form displayed after chat                               | `"health"`       | `"health"`, `"csat"`            |
+| `reset`         | Shows reset button to start new conversations                            | `"disabled"`     | `"enabled"`, `"disabled"`       |
+| `full-screen-mode-mobile` | Enables full-screen mode on mobile devices                     | `"disabled"`     | `"enabled"`, `"disabled"`       |
 
-You can customize the widget's appearance and behavior by adding optional attributes:
+### Example: Customized Widget
 
-### Visual & Position Settings
-
-| Attribute    | Description                                                    | Default          | Example Values                  |
-| :----------- | :------------------------------------------------------------- | :--------------- | :------------------------------ |
-| `position`   | Corner of the screen where the widget appears                 | `"bottom-right"` | `"bottom-right"`, `"bottom-left"` |
-| `width`      | Width of the chat widget                                      | `"400px"`        | `"350px"`, `"50%"`              |
-| `height`     | Height of the chat widget                                     | `"400px"`        | `"550px"`, `"80vh"`             |
-| `z-index`    | Stack order (increase if hidden behind other elements)        | `"9999"`         | `"10000"`                       |
-
-### Behavior Settings
-
-| Attribute    | Description                                                    | Default          | Example Values                  |
-| :----------- | :------------------------------------------------------------- | :--------------- | :------------------------------ |
-| `launcher`   | Enable bubble launcher mode                                   | `"disabled"`     | `"enabled"`                     |
-| `greeting`   | Text shown next to launcher bubble                            | `"Need help?"`   | `"Chat with us!"`               |
-| `branding-mode` | Visual theme control                                       | `"lemonflow"`    | `"lemonflow"`, `"inherit"`      |
-| `feedback-mode` | Type of feedback form after chat                           | `"health"`       | `"health"`, `"csat"`            |
-| `reset`      | Show reset button for new conversations                       | `"disabled"`     | `"enabled"`                     |
-| `full-screen-mode-mobile` | Full-screen on mobile devices                    | `"disabled"`     | `"enabled"`                     |
-
-### Example: Customized Implementation
+This example places a smaller widget in the bottom-left corner, enables the launcher, and sets the feedback mode to CSAT.
 
 ```html
 <lemonflow-chat
@@ -297,98 +238,114 @@ You can customize the widget's appearance and behavior by adding optional attrib
     greeting="How can I help?"
     feedback-mode="csat">
 </lemonflow-chat>
-
-<script src="https://chat.lemonflow.ai/widget.js" async></script>
 ```
 
-## JavaScript Integration (postMessage API)
+## 3. JavaScript Integration (postMessage API)
 
-The widget uses the standard `postMessage` API for secure communication with your application.
+The widget communicates with your host page using the standard `postMessage` API, allowing for secure, event-driven integration.
 
-### Listening for Widget Events
+### Listening for Events from the Widget
+
+You can listen for events to understand the widget's state and respond accordingly.
 
 ```javascript
 window.addEventListener('message', function(event) {
-    // Optional: Verify origin for security
-    // if (event.origin !== 'https://chat.lemonflow.ai') return;
+    // Optional: Add a security check for the origin
+    // if (event.origin !== 'https://chat.lemonflow.ai') {
+    //     return;
+    // }
 
     const data = event.data;
 
     switch (data.event) {
         case 'chat:ready':
-            console.log('Widget initialized successfully');
+            console.log('Lemonflow Chat is ready!');
             break;
-            
         case 'chat:ended':
-            console.log('Chat ended:', data.reason);
-            // Trigger post-chat actions
+            console.log('Chat session ended. Reason:', data.reason);
+            // Example: Trigger a survey or other follow-up action
             break;
-            
         case 'chat:error':
-            console.error('Widget error:', data.error);
+            console.error('An error occurred in the chat widget:', data.error);
             break;
-            
         case 'chat:resize':
-            console.log('New height:', data.height);
-            // Adjust container if needed
+            console.log('Chat resized. New height:', data.height);
+            // Example: Adjust the iframe height dynamically
+            const iframe = document.getElementById('lemonflow-chat-iframe');
+            if (iframe && data.height) {
+                iframe.style.height = `${data.height}px`;
+            }
             break;
     }
 });
 ```
 
-### Available Events
+### Events Sent by the Widget
 
 #### `chat:ready`
-Widget successfully initialized and ready for interaction.
+Fired when the widget has successfully initialized and is ready to accept messages.
 
-#### `chat:ended`
-Chat session terminated.
-- **`data.reason`**: String describing why the chat ended
+#### `chat:ended`  
+Fired when the chat session is terminated by the user, agent, or inactivity timeout.
+- **`data.reason`** (string): A brief description of why the chat ended
 
 #### `chat:error`
-Critical error occurred.
-- **`data.error`**: Error description
+Fired if a critical error occurs within the widget.
+- **`data.error`** (string): A description of the error
 
 #### `chat:resize`
-Widget dimensions changed.
-- **`data.height`**: New height in pixels
+Fired whenever the internal content height changes, allowing dynamic iframe adjustments.
+- **`data.height`** (number): The new required height in pixels
 
 <div class="note-box">
-  <strong>Coming Soon:</strong> Sending commands to the widget (planned for v2.0.5).
+  <strong>Coming Soon:</strong> Sending commands to the widget is planned for v2.0.5 and is not yet available.
 </div>
 
-## Accessibility Features
+## 4. Accessibility Features
 
-The widget is **WCAG 2.1 Level AA** compliant with comprehensive accessibility support.
+The <span style="font-family: 'Raleway', sans-serif;"><span style="font-weight: 600;">Lemonflow</span><span style="font-weight: 450;">.ai</span></span> Chat Widget is designed to be accessible and compliant with **WCAG 2.1 Level AA** standards.
 
-### Key Features
+### Key Accessibility Features
 
-- **Full keyboard navigation** with Tab/Shift+Tab
-- **Screen reader support** with proper ARIA labels
-- **Visual focus indicators** for all interactive elements
-- **High contrast mode** support
-- **Live regions** for dynamic content updates
+- **Keyboard Navigation**: All interactive elements accessible via Tab key and activated with Enter/Space
+- **Screen Reader Support**: Proper ARIA labels and roles for assistive technologies  
+- **Focus Management**: Clear visual focus indicators for keyboard users
+- **Alternative Text**: Descriptive labels for icons and images
+- **Live Regions**: Screen readers announce new messages and status changes
 
-### Keyboard Controls
+### Keyboard Navigation Guide
 
-| Key Combination | Action |
-| :-------------- | :----- |
-| `Tab` | Navigate forward |
-| `Shift + Tab` | Navigate backward |
-| `Enter` / `Space` | Activate buttons |
-| `Esc` | Close widget (when launcher enabled) |
+To activate keyboard mode:
 
-### Navigation Order
+1. **Click anywhere on the chat widget** to bring it into focus
+2. **Press Tab** to start navigating through interactive elements
 
-1. Reset button (if enabled)
-2. Close button
-3. Message input field
-4. Send button
+#### Navigation Flow
 
-<hr class="section-divider">
+When pressing Tab, focus moves through elements in this order:
 
-<div style="text-align: center; margin-top: 4rem; padding: 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 12px; border: 1px solid #e0e0e0;">
-  <h3 style="margin-top: 0;">Need Technical Support?</h3>
-  <p style="color: #666; margin-bottom: 1.5rem;">Our team is here to help with integration questions.</p>
-  <a href="mailto:tech@lemonflow.ai" style="display: inline-block; padding: 0.75rem 2rem; background: linear-gradient(135deg, #1FB270 0%, #17a060 100%); color: white; text-decoration: none; border-radius: 40px; font-weight: 600; transition: all 0.3s;">Contact Support</a>
-</div>
+1. **Reset button** (↻ icon) - if enabled
+2. **Close button** (× icon)
+3. **Message input field** ("Type your message...")  
+4. **Send button**
+
+#### Keyboard Controls
+
+| Key | Action |
+| :--- | :----- |
+| **Tab** | Move forward through interactive elements |
+| **Shift + Tab** | Move backward through elements |
+| **Enter** | Activate the currently focused button |
+| **Space** | Activate buttons (alternative to Enter) |
+| **Type directly** | When input field is focused, start typing your message |
+
+#### Visual Focus Indicators
+
+- **Active focus**: Black outline appears around the currently focused element
+- **Clear feedback**: Each interactive element displays a prominent black border when focused
+- **Consistent styling**: Focus indicators maintain the same appearance across all elements
+
+### High Contrast Support
+
+The widget automatically adapts to system high contrast settings and maintains sufficient color contrast ratios for all text and interactive elements, ensuring readability for users with visual impairments.
+
