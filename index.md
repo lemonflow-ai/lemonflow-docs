@@ -1,5 +1,3 @@
-# 🍋 Lemonflow Widget Integration Guide
-
 This guide provides everything you need to integrate the Lemonflow Chat Widget into your website.
 
 ## 1. Basic Integration
