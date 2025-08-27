@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 {%- include head.html -%}
+<head>
+  <style>
+    /* Global footer styles */
+    footer {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      color: #333;
+      padding: 4rem 2rem 2rem 2rem;
+      margin-top: 6rem;
+      text-align: center;
+      position: relative;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, #1FB270 0%, #8fd3f4 100%);
+      border-radius: 2px;
+    }
+    
+    .footer-link {
+      color: #0066cc !important;
+      text-decoration: none !important;
+      transition: all 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    
+    .footer-link:hover {
+      color: #1FB270 !important;
+      border-bottom-color: #1FB270;
+    }
+  </style>
+</head>
 <body>
   {%- include header.html -%}
   <main class="page-content" aria-label="Content">
