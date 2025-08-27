@@ -1,4 +1,6 @@
-# 🍋 Lemonflow AI Documentation
+---
+title: 🍋 Lemonflow AI Documentation
+---
 
 Welcome to the comprehensive documentation for Lemonflow AI services. Here you'll find integration guides, API references, and troubleshooting information for all our AI-powered customer service solutions.
 
@@ -18,7 +20,7 @@ Professional chat widget for websites with smart branding and accessibility feat
 - Keyboard navigation support
 - Real-time customer support
 
-**[📖 View Integration Guide](widget/integration)** | **[🚀 Quick Start](widget/integration#1-basic-integration)**
+**[📖 View Integration Guide](widget/integration)**
 
 ---
 
@@ -55,15 +57,6 @@ WhatsApp Business API integration for seamless customer support via messaging.
 
 ---
 -->
-
-## Getting Started
-
-1. **Choose your service** from the list above
-2. **Follow the integration guide** for step-by-step setup instructions
-3. **Test your implementation** using the provided examples
-4. **Contact support** if you need assistance
-
----
 
 ## Need Help?
 
