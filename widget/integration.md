@@ -1,5 +1,5 @@
 ---
-title: 🍋 Chat Widget Integration Guide
+title: Chat Widget Integration Guide
 ---
 
 <div style="background: #f8f9fa; padding: 0.5rem 1rem; margin-bottom: 1rem; border-radius: 4px; font-size: 0.9rem;">
