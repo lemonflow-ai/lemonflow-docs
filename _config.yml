@@ -10,8 +10,8 @@ email: tech@lemonflow.ai
 website: https://lemonflow.ai
 
 # Navigation structure
-header_pages:
-  - widget/integration.md
+# Removed header_pages to keep header clean
+# header_pages:
 
 # SEO
 lang: en

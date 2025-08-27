@@ -1,5 +1,5 @@
 ---
-title: 🍋 Lemonflow.docs
+title: 🍋 <b>Lemonflow</b>.docs
 layout: default
 ---
 
@@ -65,7 +65,6 @@ layout: default
   }
   
   .service-card:hover {
-    transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(31, 178, 112, 0.15);
     border-color: rgba(31, 178, 112, 0.3);
   }
@@ -114,7 +113,6 @@ layout: default
   
   .cta-button:hover {
     background: linear-gradient(135deg, #17a060 0%, #1FB270 100%);
-    transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(31, 178, 112, 0.4);
   }
   
@@ -157,7 +155,7 @@ layout: default
   
   .service-name .dot {
     font-weight: 450;
-    color: #8fd3f4;
+    color: #1a1a1a;
   }
   
   .service-name .name {
@@ -208,33 +206,6 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
 <div class="service-card">
   <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
     <span class="service-name">
-      📧 <span class="dot">.</span><span class="name">email</span>
-    </span>
-    <span class="status-badge status-coming">🔄 Coming Soon</span>
-  </h3>
-  
-  <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
-    Transform your email support with AI that understands context, sentiment, and urgency. Our email assistant drafts personalized responses, categorizes inquiries, and seamlessly escalates complex issues to human agents.
-  </p>
-  
-  <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
-  <ul class="feature-list" style="color: #666; line-height: 1.8;">
-    <li>Powered by Gemini 2.5 Pro for superior understanding</li>
-    <li>Smart inbox triage & priority detection</li>
-    <li>Contextual response generation with brand voice</li>
-    <li>Seamless CRM & helpdesk integration</li>
-    <li>Multi-language support with translation</li>
-    <li>Human-in-the-loop approval workflows</li>
-  </ul>
-  
-  <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
-    Documentation in development - Expected Q1 2025
-  </p>
-</div>
-
-<div class="service-card">
-  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
-    <span class="service-name">
       📱 <span class="dot">.</span><span class="name">chat</span> <span class="type">(whatsapp)</span>
     </span>
     <span class="status-badge status-coming">🔄 Coming Soon</span>
@@ -256,6 +227,33 @@ Welcome to the public documentation for <span style="font-family: 'Raleway', san
   
   <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
     Documentation in development - Expected Q2 2025
+  </p>
+</div>
+
+<div class="service-card">
+  <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a;">
+    <span class="service-name">
+      📧 <span class="dot">.</span><span class="name">email</span>
+    </span>
+    <span class="status-badge status-coming">🔄 Coming Soon</span>
+  </h3>
+  
+  <p style="color: #5a5a5a; margin-bottom: 1.5rem; line-height: 1.6;">
+    Transform your email support with AI that understands context, sentiment, and urgency. Our email assistant drafts personalized responses, categorizes inquiries, and seamlessly escalates complex issues to human agents.
+  </p>
+  
+  <h4 style="font-size: 1rem; margin-bottom: 0.75rem; color: #3a3a3a;">Key Features:</h4>
+  <ul class="feature-list" style="color: #666; line-height: 1.8;">
+    <li>Powered by Gemini 2.5 Pro for superior understanding</li>
+    <li>Smart inbox triage & priority detection</li>
+    <li>Contextual response generation with brand voice</li>
+    <li>Seamless CRM & helpdesk integration</li>
+    <li>Multi-language support with translation</li>
+    <li>Human-in-the-loop approval workflows</li>
+  </ul>
+  
+  <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
+    Documentation in development - Expected Q1 2025
   </p>
 </div>
 
