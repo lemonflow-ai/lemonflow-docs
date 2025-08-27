@@ -227,10 +227,6 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <li>Rich media support (images, documents, voice notes)</li>
     <li>Interactive buttons & quick replies</li>
   </ul>
-  
-  <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
-    Documentation in development - Expected Q4 2025
-  </p>
 </div>
 
 <div class="service-card">
@@ -253,10 +249,6 @@ Welcome to the public documentation for Lemonflow.ai services. Here you'll find 
     <li>Multi-language support with translation</li>
     <li>Smart attachement handling</li>
   </ul>
-  
-  <p style="color: #888; font-style: italic; margin-top: 1.5rem;">
-    Documentation in development - Expected Q4 2025
-  </p>
 </div>
 
 </div>
