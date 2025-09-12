@@ -204,7 +204,7 @@ To add the chat widget to your website or mobile application, place the followin
 ```
 
 <div class="note-box">
-  <strong>Important:</strong> Replace <code>YOUR_COMPANY_ID</code> and <code>YOUR_PUBLIC_KEY</code> with the credentials provided to you by Lemonflow.
+  <strong>Important:</strong> Replace <code>YOUR_COMPANY_ID</code> and <code>YOUR_PUBLIC_KEY</code> with the credentials provided to you by Lemonflow. These credentials are unique to your organization and required for authentication.
 </div>
 
 ## 2. Customization Options
@@ -215,22 +215,29 @@ You can customize the widget's appearance by adding attributes to the `<lemonflo
 
 | Attribute    | Description                                                                 | Default          | Example Values                  |
 | :----------- | :-------------------------------------------------------------------------- | :--------------- | :------------------------------ |
-| `company`    | **Required** - Your unique company identifier                               | -                | `"my-company"`                  |
-| `public-key` | **Required** - Your public API key for authentication                       | -                | `"pk_lemonflow_..."`            |
-| `position`   | Corner of the screen where the widget will be fixed                         | `"bottom-right"` | `"bottom-right"`, `"bottom-left"` |
-| `width`      | Width of the chat widget                                                    | `"400px"`        | `"350px"`, `"50%"`              |
-| `height`     | Height of the chat widget                                                   | `"400px"`        | `"550px"`, `"80vh"`             |
-| `z-index`    | Stack order of the widget (increase if hidden behind content)               | `"9999"`         | `"10000"`                       |
-| `launcher`   | Enables bubble launcher mode                                                | disabled         | `"enabled"`                     |
-| `greeting`   | Text displayed next to the launcher bubble                                  | `"Need help?"`   | `"Chat with us!"`               |
-| `branding-mode` | Controls the widget's visual theme                                       | `"lemonflow"`    | `"lemonflow"`, `"inherit"`      |
-| `feedback-mode` | Type of feedback form displayed after chat                               | `"health"`       | `"health"`, `"csat"`            |
-| `reset`         | Shows reset button to start new conversations                            | `"disabled"`     | `"enabled"`, `"disabled"`       |
-| `full-screen-mode-mobile` | Enables full-screen mode on mobile devices                     | `"disabled"`     | `"enabled"`, `"disabled"`       |
+| `company`    | **Required** - Your unique company identifier                               | -                | `"your-company"`                |
+| `public-key` | **Required** - Your public API key for authentication                       | -                | `"pk_your_key"`                 |
+| `position`   | Corner of the screen where the widget will be positioned                    | `"bottom-right"` | `"bottom-right"`, `"bottom-left"`, `"top-right"`, `"top-left"` |
+| `width`      | Width of the chat widget                                                    | `"400px"`        | `"350px"`, `"450px"`, `"50%"`   |
+| `height`     | Height of the chat widget                                                   | `"600px"`        | `"500px"`, `"700px"`, `"80vh"`  |
+| `z-index`    | Stack order of the widget (increase if hidden behind other elements)        | `"9999"`         | `"10000"`, `"99999"`            |
+| `launcher`   | Enables/disables bubble launcher mode                                       | `"disabled"`     | `"enabled"`, `"disabled"`       |
+| `greeting`   | Text displayed next to the launcher bubble                                  | `"Need help?"`   | `"Chat with us!"`, `"How can we help?"` |
+| `branding-mode` | Controls the widget's visual theme                                       | `"lemonflow"`    | `"lemonflow"`, `"inherit"`, `"custom"` |
+| `brand-colors` | Custom brand colors (when branding-mode is "custom")                      | -                | JSON object with color values   |
+| `feedback-mode` | Type of feedback form displayed after chat                               | `"none"`         | `"none"`, `"health"`, `"csat"`   |
+| `reset`      | Shows/hides reset button to start new conversations                         | `"disabled"`     | `"enabled"`, `"disabled"`       |
+| `full-screen-mobile` | Enables full-screen mode on mobile devices                          | `"disabled"`     | `"enabled"`, `"disabled"`       |
+| `agent-version` | Selects a specific agent version configured for your company             | `"default"`      | `"default"`, `"v2"`, `"france"`, `"uk"` |
+| `language`   | Overrides the default language setting                                      | (uses config)    | `"en"`, `"de"`, `"fr"`, `"es"`, `"it"`, `"nl"` |
+| `state`      | Sets initial context state for the agent                                    | -                | `"homepage"`, `"checkout"`, `"support"` |
+| `auto-show`  | Controls whether widget shows automatically on page load                    | `"true"`         | `"true"`, `"false"`              |
+| `charger-id-mode` | Controls charger ID extraction for EV charging contexts                | `"disabled"`     | `"disabled"`, `"auto"`, `"manual"` |
+| `charger-id-value` | Manual charger ID value (when charger-id-mode is "manual")            | -                | `"station-123"`, `"charger-abc"` |
 
 ### Example: Customized Widget
 
-This example places a smaller widget in the bottom-left corner, enables the launcher, and sets the feedback mode to CSAT.
+This example places a smaller widget in the bottom-left corner with a launcher bubble and CSAT feedback.
 
 ```html
 <lemonflow-chat
@@ -238,10 +245,52 @@ This example places a smaller widget in the bottom-left corner, enables the laun
     public-key="YOUR_PUBLIC_KEY"
     position="bottom-left"
     width="350px"
-    height="550px"
+    height="500px"
     launcher="enabled"
-    greeting="How can I help?"
-    feedback-mode="csat">
+    greeting="How can we help?"
+    feedback-mode="csat"
+    reset="enabled">
+</lemonflow-chat>
+
+<script src="https://chat.lemonflow.ai/widget.js" async></script>
+```
+
+### Example: Advanced Configuration
+
+This example demonstrates language override, agent version selection, and programmatic control.
+
+```html
+<lemonflow-chat
+    company="YOUR_COMPANY_ID"
+    public-key="YOUR_PUBLIC_KEY"
+    agent-version="v2"             <!-- Use v2 agent variant -->
+    language="de"                  <!-- Override to German -->
+    state="checkout"               <!-- Set checkout context -->
+    auto-show="false"              <!-- Show via JavaScript control -->
+    full-screen-mobile="enabled">  <!-- Full screen on mobile -->
+</lemonflow-chat>
+
+<script src="https://chat.lemonflow.ai/widget.js" async></script>
+```
+
+### Example: EV Charging Station Integration
+
+For EV charging applications, you can automatically extract or manually set the charger ID.
+
+```html
+<!-- Auto-extract charger ID from URL parameters -->
+<lemonflow-chat
+    company="YOUR_COMPANY_ID"
+    public-key="YOUR_PUBLIC_KEY"
+    charger-id-mode="auto">
+</lemonflow-chat>
+
+<!-- Or manually specify the charger ID -->
+<lemonflow-chat
+    company="YOUR_COMPANY_ID"
+    public-key="YOUR_PUBLIC_KEY"
+    charger-id-mode="manual"
+    charger-id-value="station-42">
 </lemonflow-chat>
 
 <script src="https://chat.lemonflow.ai/widget.js" async></script>
@@ -261,7 +310,51 @@ This example places a smaller widget in the bottom-left corner, enables the laun
 
 ## 3. JavaScript Integration (postMessage API)
 
-The widget communicates with your host page using the standard `postMessage` API, allowing for secure, event-driven integration.
+The widget can be controlled programmatically via `postMessage` API and sends events back to your page.
+
+### Sending Commands to the Widget
+
+```javascript
+// Show the widget
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'show'
+}, '*');
+
+// Hide the widget
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'hide'
+}, '*');
+
+// Reset conversation
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'reset'
+}, '*');
+
+// Update state/context
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'update',
+    state: 'product_page'
+}, '*');
+```
+
+### Helper Object for Clean Code
+
+```javascript
+const LemonflowControl = {
+    show: () => window.postMessage({ target: 'lemonflow-widget', command: 'show' }, '*'),
+    hide: () => window.postMessage({ target: 'lemonflow-widget', command: 'hide' }, '*'),
+    reset: () => window.postMessage({ target: 'lemonflow-widget', command: 'reset' }, '*'),
+    updateState: (state) => window.postMessage({ target: 'lemonflow-widget', command: 'update', state }, '*')
+};
+
+// Usage:
+LemonflowControl.show();
+LemonflowControl.updateState('checkout');
+```
 
 ### Listening for Events from the Widget
 
@@ -277,8 +370,11 @@ window.addEventListener('message', function(event) {
     const data = event.data;
 
     switch (data.event) {
-        case 'chat:ready':
-            console.log('Lemonflow Chat is ready!');
+        case 'chat:initialized':
+            console.log('Lemonflow Chat is initialized and ready!');
+            break;
+        case 'chat:started':
+            console.log('User started chatting:', data.firstUserMessage);
             break;
         case 'chat:ended':
             console.log('Chat session ended. Reason:', data.reason);
@@ -303,14 +399,41 @@ window.addEventListener('message', function(event) {
 
 | Event | Description | Data Properties |
 | :---- | :---------- | :-------------- |
-| `chat:ready` | Widget successfully initialized and ready to accept messages | - |
+| `chat:initialized` | Widget successfully initialized and ready to accept messages | `data.callId` (string): Unique session identifier |
+| `chat:started` | User sends their first message, conversation has begun | `data.callId` (string): Session ID<br>`data.firstUserMessage` (string): User's first message |
 | `chat:ended` | Chat session terminated by user, agent, or timeout | `data.reason` (string): Why the chat ended |
 | `chat:error` | Critical error occurred within the widget | `data.error` (string): Error description |
 | `chat:resize` | Internal content height changed | `data.height` (number): New height in pixels |
 
-<div class="note-box">
-  <strong>Coming Soon:</strong> Sending commands to the widget is planned for v2.0.5 and is not yet available.
-</div>
+#### Widget Control Events
+
+| Event | Description | Data Properties |
+| :---- | :---------- | :-------------- |
+| `widget:shown` | Widget became visible via `show` command | - |
+| `widget:hidden` | Widget was hidden via `hide` command | - |
+| `widget:reset` | Conversation was reset via `reset` command | - |
+| `widget:state_updated` | State was updated via `update` command | `data.state` (string): New state |
+
+### Example: Dynamic Widget Control
+
+```javascript
+// Show widget when user needs help
+if (userStuckOnPage) {
+    LemonflowControl.show();
+    LemonflowControl.updateState('help_needed');
+}
+
+// Hide widget on admin pages
+if (window.location.pathname.startsWith('/admin')) {
+    LemonflowControl.hide();
+}
+
+// Update context on navigation
+window.addEventListener('popstate', () => {
+    const page = window.location.pathname.split('/')[1] || 'homepage';
+    LemonflowControl.updateState(page);
+});
+```
 
 ## 4. Accessibility Features
 
