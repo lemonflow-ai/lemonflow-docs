@@ -224,7 +224,7 @@ You can customize the widget's appearance by adding attributes to the `<lemonflo
 | `launcher`   | Enables/disables bubble launcher mode                                       | `"disabled"`     | `"enabled"`, `"disabled"`       |
 | `greeting`   | Text displayed next to the launcher bubble                                  | `"Need help?"`   | `"Chat with us!"`, `"How can we help?"` |
 | `branding-mode` | Controls the widget's visual theme                                       | `"lemonflow"`    | `"lemonflow"`, `"inherit"`, `"custom"` |
-| `brand-colors` | Custom brand colors (when branding-mode is "custom")                      | -                | JSON object with color values   |
+| `brand-colors` | Custom brand colors (when branding-mode is "custom", must include #)      | -                | `{"primary": "#1100ffff", "secondary": "#00ff59ff"}` |
 | `feedback-mode` | Type of feedback form displayed after chat                               | `"none"`         | `"none"`, `"health"`, `"csat"`   |
 | `reset`      | Shows/hides reset button to start new conversations                         | `"disabled"`     | `"enabled"`, `"disabled"`       |
 | `full-screen-mobile` | Enables full-screen mode on mobile devices                          | `"disabled"`     | `"enabled"`, `"disabled"`       |
