@@ -217,7 +217,7 @@ You can customize the widget's appearance by adding attributes to the `<lemonflo
 | :----------- | :-------------------------------------------------------------------------- | :--------------- | :------------------------------ |
 | `company`    | **Required** - Your unique company identifier                               | -                | `"your-company"`                |
 | `public-key` | **Required** - Your public API key for authentication                       | -                | `"pk_your_key"`                 |
-| `position`   | Corner of the screen where the widget will be positioned                    | `"bottom-right"` | `"bottom-right"`, `"bottom-left"`, `"top-right"`, `"top-left"` |
+| `position`   | Corner of the screen where the widget will be positioned                    | `"bottom-right"` | `"bottom-right"`, `"bottom-left"`|
 | `width`      | Width of the chat widget                                                    | `"400px"`        | `"350px"`, `"450px"`, `"50%"`   |
 | `height`     | Height of the chat widget                                                   | `"600px"`        | `"500px"`, `"700px"`, `"80vh"`  |
 | `z-index`    | Stack order of the widget (increase if hidden behind other elements)        | `"9999"`         | `"10000"`, `"99999"`            |
