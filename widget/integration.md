@@ -235,6 +235,62 @@ You can customize the widget's appearance by adding attributes to the `<lemonflo
 | `charger-id-mode` | Controls charger ID extraction for EV charging contexts                | `"disabled"`     | `"disabled"`, `"auto"`, `"manual"` |
 | `charger-id-value` | Manual charger ID value (when charger-id-mode is "manual")            | -                | `"station-123"`, `"charger-abc"` |
 
+### Understanding Brand Colors
+
+When using `branding-mode="custom"`, you can specify two brand colors via the `brand-colors` attribute:
+
+#### Primary Color
+The primary color is used for:
+- Launcher bubble background
+- Loading spinner
+- Input field border/focus state
+
+#### Secondary Color
+The secondary color is used for:
+- Icons inside the launcher bubble (message icon, close X icon)
+- "Need help?" greeting text color
+- Send button hover state
+- Text and secondary elements
+
+**Example**:
+```html
+<lemonflow-chat
+    company="your-company"
+    public-key="pk_your_key"
+    branding-mode="custom"
+    brand-colors='{"primary": "#1100ffff", "secondary": "#00ff59ff"}'>
+</lemonflow-chat>
+```
+
+In this example:
+- Launcher bubble background will be blue (#1100ffff)
+- Message icon and X icon will be green (#00ff59ff)
+- Greeting text will be green (#00ff59ff)
+
+### Branding Modes Explained
+
+**`lemonflow` (default)**
+Uses Lemonflow's default color scheme:
+- Primary: Lemonflow green (#1FB270)
+- Secondary: Blue accent (#0ea5e9)
+
+**`inherit`**
+Automatically detects and inherits your website's brand colors:
+- Analyzes your page's DOM for logo colors, CTAs, and primary UI elements
+- Extracts primary and secondary colors from your existing design
+- Matches font family from your site
+
+**`custom`**
+Allows you to manually specify exact brand colors:
+- Requires `brand-colors` attribute with JSON object
+- Must include hex color codes with full 8-character format (including alpha)
+- Primary color for main UI elements, secondary for icons and text
+
+**Color Format Requirements for Custom Mode:**
+- Use 8-character hex codes: `#RRGGBBaa` (includes alpha channel)
+- Example: `#1100ffff` (blue with full opacity)
+- Invalid format example: `#1100ff` ❌ (missing alpha channel)
+  
 ### Example: Customized Widget
 
 This example places a smaller widget in the bottom-left corner with a launcher bubble and CSAT feedback.
