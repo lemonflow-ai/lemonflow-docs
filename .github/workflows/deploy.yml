@@ -41,7 +41,8 @@ jobs:
       - name: Prepare site
         run: |
           mkdir -p _site
-          cp -r *.html protected _site/ 2>/dev/null || true
+          cp index.html _site/
+          cp -r protected _site/
           # Shared docs: copy into both protected folders so each gets encrypted with its own key
           cp _site/protected/integration/integration-requirements.html _site/protected/operations/integration-requirements.html
 
@@ -51,10 +52,9 @@ jobs:
           staticrypt _site/protected/integration/*.html \
             -p "$INTEGRATION_KEY" \
             --short \
+            -f password-template.html \
             --template-title "Lemonflow — Technical Documentation" \
-            --template-instructions "This document is restricted to technical integration partners.<br><br>Please enter your tech key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
-            --template-color-primary "#1a7a52" \
-            --template-color-secondary "#f0faf6" \
+            --template-instructions "This document is restricted to technical integration partners.<br>If your key is not accepted, you may not have access to this section.<br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
             --remember 30 \
             -d /tmp/encrypted-integration
           cp /tmp/encrypted-integration/*.html _site/protected/integration/
@@ -67,10 +67,9 @@ jobs:
           staticrypt _site/protected/operations/*.html \
             -p "$OPERATIONS_KEY" \
             --short \
+            -f password-template.html \
             --template-title "Lemonflow — Operations Documentation" \
-            --template-instructions "This document is restricted to operations partners.<br><br>Please enter your operations key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
-            --template-color-primary "#880e4f" \
-            --template-color-secondary "#fce4ec" \
+            --template-instructions "This document is restricted to operations partners.<br>If your key is not accepted, you may not have access to this section.<br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
             --remember 30 \
             -d /tmp/encrypted-operations
           cp /tmp/encrypted-operations/*.html _site/protected/operations/
