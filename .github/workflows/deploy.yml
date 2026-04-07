@@ -19,6 +19,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify secrets exist
+        run: |
+          if [ -z "$TECH_KEY" ] || [ -z "$OPS_KEY" ]; then
+            echo "::error::Missing encryption secrets. LEMONFLOW_DOCS_TECH_KEY and LEMONFLOW_DOCS_OPERATIONS_KEY must be set. Aborting to prevent unencrypted deployment."
+            exit 1
+          fi
+          echo "Secrets verified."
+        env:
+          TECH_KEY: ${{ secrets.LEMONFLOW_DOCS_TECH_KEY }}
+          OPS_KEY: ${{ secrets.LEMONFLOW_DOCS_OPERATIONS_KEY }}
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -67,6 +78,18 @@ jobs:
           done
         env:
           OPERATIONS_KEY: ${{ secrets.LEMONFLOW_DOCS_OPERATIONS_KEY }}
+
+      - name: Verify encryption
+        run: |
+          # Check that all protected HTML files contain Staticrypt markers
+          for file in _site/protected/integration/*.html _site/protected/operations/*.html; do
+            [ -f "$file" ] || continue
+            if ! grep -q "staticrypt" "$file"; then
+              echo "::error::$file was NOT encrypted. Aborting deployment."
+              exit 1
+            fi
+          done
+          echo "All protected files verified as encrypted."
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
