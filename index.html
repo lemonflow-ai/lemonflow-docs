@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemonflow — Technical Documentation</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 940px; margin: 0 auto; padding: 40px 20px; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1 { color: #1a1a1a; font-size: 26px; font-weight: 700; border-bottom: 3px solid #5ce0c2; padding-bottom: 12px; margin-bottom: 5px; }
+        .meta { color: #666; margin-bottom: 30px; font-size: 13px; }
+        .meta strong { color: #1a1a1a; }
+        p, li { font-size: 13.5px; line-height: 1.55; }
+        .header-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logo { height: 36px; width: auto; }
+        a { color: #1565c0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Overview strip ── */
+        .overview-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 28px 0 36px 0;
+        }
+        .overview-card {
+            border-radius: 8px;
+            padding: 18px 16px 14px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.12s, box-shadow 0.12s;
+        }
+        .overview-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-decoration: none; }
+        .overview-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+        .overview-count { font-size: 11px; color: #888; display: block; }
+        .overview-icon { margin-bottom: 6px; display: flex; justify-content: center; }
+        .overview-icon svg { width: 26px; height: 26px; }
+        .section-icon { flex-shrink: 0; display: flex; align-items: center; }
+        .section-icon svg { width: 20px; height: 20px; }
+
+        .ov-channels { background: #f0f4ff; border: 1px solid #d0daff; }
+        .ov-channels .overview-label { color: #3b5998; }
+        .ov-channels .overview-icon svg { stroke: #3b5998; }
+        .ov-integration { background: #f0faf6; border: 1px solid #b8e6d4; }
+        .ov-integration .overview-label { color: #1a7a52; }
+        .ov-integration .overview-icon svg { stroke: #1a7a52; }
+        .ov-ticketing { background: #fce4ec; border: 1px solid #f8bbd0; }
+        .ov-ticketing .overview-label { color: #880e4f; }
+        .ov-ticketing .overview-icon svg { stroke: #880e4f; }
+
+        /* ── Access legend ── */
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin: 0 0 32px 0;
+            padding: 14px 18px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .legend-title { font-weight: 700; color: #1a1a1a; margin-right: 4px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+        .dot-tech { background: #1565c0; }
+        .dot-operations { background: #880e4f; }
+
+        /* ── Section headers ── */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+        .section-icon-channels svg { stroke: #3b5998; }
+        .section-icon-integration svg { stroke: #1a7a52; }
+        .section-icon-ticketing svg { stroke: #880e4f; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+        .section-count { font-size: 12px; color: #999; margin-left: auto; }
+
+        /* ── Document cards ── */
+        .doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .doc-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px 18px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            border-left: 4px solid #e0e0e0;
+        }
+        .doc-card:hover {
+            border-color: #5ce0c2;
+            border-left-color: #5ce0c2;
+            box-shadow: 0 2px 8px rgba(92, 224, 194, 0.18);
+            text-decoration: none;
+        }
+        .doc-card-title { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .doc-card-desc { font-size: 12.5px; color: #666; margin: 0 0 8px 0; flex-grow: 1; }
+        .doc-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+        .doc-card-status { font-size: 11px; color: #aaa; }
+        .doc-card-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px; }
+        .badge-integration { background: #e3f2fd; color: #1565c0; }
+        .badge-operations { background: #fce4ec; color: #880e4f; }
+        .badge-coming { background: #fff8e1; color: #f57f17; }
+
+        .card-channels { border-left-color: #5b86e5; }
+        .card-integration { border-left-color: #36b37e; }
+        .card-ticketing { border-left-color: #c2185b; }
+
+        /* ── Footer ── */
+        .section-divider { border: none; border-top: 1px solid #e0e0e0; margin: 40px 0; }
+
+        @media (max-width: 700px) {
+            .overview-strip { grid-template-columns: 1fr; }
+            .doc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-with-logo">
+    <div>
+        <h1>Lemonflow<br>Technical Documentation</h1>
+    </div>
+    <svg class="logo" viewBox="0 0 600 110" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_103)"><path d="M44.6391 69.7681C39.6456 65.9572 36.4121 60.4211 35.5373 54.1741C33.0328 36.2433 17.589 23.3101 0.109375 23.6446V35.4591C11.8198 35.1245 22.2076 43.7867 23.8894 55.8155C25.9566 73.0772 42.0877 87.0089 59.3278 86.3502V74.5305C54.0636 74.6873 48.9296 73.0406 44.6443 69.7681H44.6391Z" fill="#1D1D1D"/><path d="M12.2363 57.4622C11.5334 51.5759 5.99321 46.8292 0.109374 47.284C-0.369664 55.0418 0.76024 63.1969 3.36371 70.5992C11.0856 93.7577 34.9958 110.716 59.3278 109.984V98.1593C36.4017 98.9174 14.9856 80.4115 12.2363 57.4622Z" fill="#1D1D1D"/><path d="M58.8488 50.8806C58.2968 46.9651 57.3596 43.1124 56.0579 39.3851C47.758 15.7823 25.2328 -0.287508 0.109375 1.22481e-05V11.8145C23.3583 11.4747 43.858 28.6945 47.1957 52.5221C48.0444 58.6541 53.4232 63.0663 59.3278 62.7003C59.5569 58.7953 59.4007 54.838 58.8488 50.8806Z" fill="#1D1D1D"/><path d="M159.009 37.9579C142.763 37.9579 132.87 48.9359 132.87 65.5598C132.87 82.1837 142.659 93.8936 159.321 93.8936C173.068 93.8936 180.982 86.9932 182.961 77.0606H170.985C169.423 81.3473 165.778 83.8566 159.425 83.8566C149.845 83.8566 144.846 77.7925 144.534 66.919H183.69V62.946C183.377 49.145 174.942 37.9579 159.009 37.9579ZM145.054 58.1366C146.408 51.968 150.574 47.3676 158.905 47.3676C166.715 47.3676 170.881 52.1771 171.61 58.1366H145.054Z" fill="#1D1D1D"/><path d="M253.775 37.9579C247.215 37.9579 242.32 40.1535 239.092 44.4402H236.593C233.781 40.1535 229.199 37.9579 222.846 37.9579C216.494 37.9579 212.12 40.0489 209.516 44.1265H207.017V39.3171H195.666V92.5344H207.434V63.5733C207.434 55.3137 210.974 48.5177 218.785 48.5177C225.033 48.5177 227.845 52.8044 227.845 60.6458V92.5344H239.613V62.2141C239.613 54.2681 243.466 48.5177 250.86 48.5177C257.212 48.5177 259.92 52.5953 259.92 60.5413V92.5344H271.687V58.5548C271.687 46.0085 266.168 37.9579 253.775 37.9579Z" fill="#1D1D1D"/><path d="M309.802 37.9579C293.14 37.9579 283.038 49.6678 283.038 65.8735C283.038 82.0792 293.14 93.8936 309.802 93.8936C326.464 93.8936 336.565 82.1837 336.565 65.8735C336.565 49.5632 326.464 37.9579 309.802 37.9579ZM309.802 83.8566C299.492 83.8566 294.806 75.3878 294.806 65.8735C294.806 56.3592 299.492 47.995 309.802 47.995C320.111 47.995 324.798 56.5683 324.798 65.8735C324.798 75.1787 320.111 83.8566 309.802 83.8566Z" fill="#1D1D1D"/><path d="M377.804 37.9579C370.723 37.9579 365.516 40.3626 362.496 44.4402H359.997V39.3171H348.646V92.5344H360.413V64.0961C360.413 55.7319 365.724 48.5177 374.159 48.5177C381.97 48.5177 385.927 52.9089 385.927 61.5868V92.5344H397.695V59.2867C397.695 46.0085 391.03 37.9579 377.804 37.9579Z" fill="#1D1D1D"/><path d="M498.36 37.8376C481.698 37.8376 471.597 49.5476 471.597 65.7532C471.597 81.9589 481.698 93.7734 498.36 93.7734C515.022 93.7734 525.124 82.0635 525.124 65.7532C525.124 49.443 515.022 37.8376 498.36 37.8376ZM498.36 83.7363C488.051 83.7363 483.364 75.2676 483.364 65.7532C483.364 56.2389 488.051 47.8747 498.36 47.8747C508.67 47.8747 513.356 56.448 513.356 65.7532C513.356 75.0584 508.67 83.7363 498.36 83.7363Z" fill="#1D1D1D"/><path d="M588.857 39.1968L583.546 78.8223H581.046L573.444 55.1934H560.323L552.617 78.7177H550.117L544.702 39.1968H533.455L540.849 92.4142H556.99L565.53 66.4851H568.029L576.464 92.4142H592.502L600 39.1968H588.857Z" fill="#1D1D1D"/><path d="M437.304 16.1063C423.1 16.1063 415.086 25.0717 415.086 38.8204V39.317H406.651V49.3541H415.086V92.5344H426.854V49.3541H440.704V39.317H426.854V38.8204C426.854 31.486 429.9 26.6975 437.304 26.6975C444.708 26.6975 447.754 31.486 447.754 38.8204V92.409H459.522V38.8204C459.522 25.0717 451.509 16.1063 437.304 16.1063Z" fill="#1D1D1D"/><path d="M112.277 75.4923V16.5925H100.509V76.0151C100.509 88.666 108.216 93.8936 120.191 93.8936H124.045V83.8566H120.296C114.36 83.8566 112.277 79.9881 112.277 75.4923Z" fill="#1D1D1D"/></g><defs><clipPath id="clip0_1_103"><rect width="600" height="110" fill="white"/></clipPath></defs></svg>
+</div>
+<div class="meta">
+    <strong>Lemonflow Technologies GmbH</strong> &nbsp;|&nbsp;
+    <a href="https://lemonflow.ai">lemonflow.ai</a> &nbsp;|&nbsp;
+    <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a>
+</div>
+
+<p style="font-size: 13.5px; color: #444; margin-bottom: 0;">Technical documentation for Lemonflow.ai services. Integration guides, API references, and best practices for our AI-powered customer support platform. Protected documents require credentials &mdash; contact <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a> for access.</p>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- Overview strip                                 -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="overview-strip">
+    <a class="overview-card ov-channels" href="#channels">
+        <span class="overview-icon"><i data-lucide="message-circle"></i></span>
+        <span class="overview-label">Channels</span>
+        <span class="overview-count">2 guides</span>
+    </a>
+    <a class="overview-card ov-integration" href="#integration">
+        <span class="overview-icon"><i data-lucide="plug"></i></span>
+        <span class="overview-label">API Integration</span>
+        <span class="overview-count">3 guides</span>
+    </a>
+    <a class="overview-card ov-ticketing" href="#ticketing">
+        <span class="overview-icon"><i data-lucide="ticket"></i></span>
+        <span class="overview-label">Ticketing &amp; Handover</span>
+        <span class="overview-count">3 guides</span>
+    </a>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- Access legend                                  -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="legend">
+    <span class="legend-title">Access:</span>
+    <span class="legend-item"><span class="legend-dot dot-tech"></span> <strong>Tech</strong> &mdash; technical integration partners</span>
+    <span class="legend-item"><span class="legend-dot dot-operations"></span> <strong>Operations</strong> &mdash; callcenter &amp; operations teams</span>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 1. Channels                                    -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="channels" class="section-header">
+    <span class="section-icon section-icon-channels"><i data-lucide="message-circle"></i></span>
+    <span class="section-title">Channels</span>
+    <span class="section-count">2 guides</span>
+</div>
+
+<div class="doc-grid">
+    <a class="doc-card card-channels" href="protected/integration/widget-integration.html">
+        <span class="doc-card-title">Chat Widget &mdash; Integration Guide</span>
+        <p class="doc-card-desc">Embed the Lemonflow AI engine into your website or app. Two lines of HTML, full customization, postMessage API, and WCAG 2.1 AA accessibility.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-integration">Tech</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-channels" href="protected/integration/voice-inbound-sip.html">
+        <span class="doc-card-title">Voice Inbound &mdash; SIP Trunking</span>
+        <p class="doc-card-desc">How to route inbound calls to Lemonflow via SIP. SIP domain, authentication, firewall rules, and what we need from your telco provider.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-integration">Tech</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-channels" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">Chat WhatsApp &mdash; Integration Guide</span>
+        <p class="doc-card-desc">Deploy the AI engine within WhatsApp. Official Business API integration, rich media support, and interactive buttons.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-channels" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">Email &mdash; Integration Guide</span>
+        <p class="doc-card-desc">AI-powered email support with contextual response generation, CRM integration, and human-in-the-loop approval workflows.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 2. API Integration                             -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="integration" class="section-header">
+    <span class="section-icon section-icon-integration"><i data-lucide="plug"></i></span>
+    <span class="section-title">API Integration</span>
+    <span class="section-count">3 guides</span>
+</div>
+
+<div class="doc-grid">
+    <a class="doc-card card-integration" href="protected/integration/integration-requirements.html">
+        <span class="doc-card-title">Integration Requirements &mdash; Overview</span>
+        <p class="doc-card-desc">Overview of all endpoints required for integration with Lemonflow. Bulk station data, real-time status, OCPP logs, remote actions, and ticketing.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span><span class="doc-card-badge badge-integration">Tech</span> <span class="doc-card-badge badge-operations">Operations</span></span>
+        </div>
+    </a>
+
+    <a class="doc-card card-integration" href="protected/integration/ocpp-logs.html">
+        <span class="doc-card-title">OCPP Logs &mdash; API Guide</span>
+        <p class="doc-card-desc">Best practices and typical API structure for OCPP log access. Time-based queries, pagination, filtering, and example request/response payloads.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-integration">Tech</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-integration" href="protected/integration/remote-actions.html">
+        <span class="doc-card-title">Remote Actions &mdash; API Guide</span>
+        <p class="doc-card-desc">Best practices and typical API structure for remote charger actions (reset, stop, unlock). ID mapping, authentication, and example request/response payloads.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-integration">Tech</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-integration" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">Station Information &mdash; API Guide</span>
+        <p class="doc-card-desc">Bulk station data import, real-time status polling, and connector-level updates. Covers both initial synchronisation and live polling during support calls.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-integration" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">OCPI Integration</span>
+        <p class="doc-card-desc">Integration via the Open Charge Point Interface standard. How we use OCPI modules (Locations, Sessions, Commands, CDRs) as an alternative to custom API endpoints.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-integration" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">CRM Integration</span>
+        <p class="doc-card-desc">Connect your CRM to provide customer data, account details, and case history to the AI agent during conversations. Salesforce, HubSpot, or custom endpoints.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 3. Ticketing & Handover                        -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ticketing" class="section-header">
+    <span class="section-icon section-icon-ticketing"><i data-lucide="ticket"></i></span>
+    <span class="section-title">Ticketing &amp; Handover</span>
+    <span class="section-count">3 guides</span>
+</div>
+
+<div class="doc-grid">
+    <a class="doc-card card-ticketing" href="protected/integration/voice-outbound-sip.html">
+        <span class="doc-card-title">Voice Outbound &mdash; SIP Transfer &amp; UUI</span>
+        <p class="doc-card-desc">How Lemonflow transfers calls to your callcenter via SIP. What to whitelist, UUI headers for agent screen-pop, and what we need from your callcenter.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-integration">Tech</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-ticketing" href="protected/operations/call-transfer-flow.html">
+        <span class="doc-card-title">Call Transfer Flow</span>
+        <p class="doc-card-desc">How calls are handed over from the AI agent to your callcenter. Hold music, agent whisper summary, &ldquo;press 1 to hear the summary&rdquo;, and conference bridge &mdash; the end-to-end experience.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">April 2026</span>
+            <span class="doc-card-badge badge-operations">Operations</span>
+        </div>
+    </a>
+
+    <a class="doc-card card-ticketing" style="opacity: 0.5; pointer-events: none; border-left-color: #ccc;">
+        <span class="doc-card-title">Ticketing System Integration</span>
+        <p class="doc-card-desc">How to connect your ticketing system (Zendesk, Salesforce, Jira, Freshdesk, or custom) to Lemonflow. Automatic ticket creation, field mapping, and escalation workflows.</p>
+        <div class="doc-card-footer">
+            <span class="doc-card-status">Coming soon</span>
+            <span class="doc-card-badge badge-coming">Coming soon</span>
+        </div>
+    </a>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- Footer                                         -->
+<!-- ══════════════════════════════════════════════ -->
+<hr class="section-divider">
+<p style="color: #999; font-size: 12px; text-align: center; margin-bottom: 8px;">&copy; 2026 Lemonflow Technologies GmbH &nbsp;|&nbsp; <a href="https://lemonflow.ai" style="color: #5ce0c2;">lemonflow.ai</a> &nbsp;|&nbsp; <a href="mailto:tech@lemonflow.ai" style="color: #5ce0c2;">tech@lemonflow.ai</a></p>
+<p style="color: #bbb; font-size: 11px; text-align: center; line-height: 1.5; font-style: italic;">This document contains proprietary and confidential information belonging to Lemonflow Technologies GmbH. Any reproduction, distribution, or use of this material without the explicit permission of Lemonflow Technologies GmbH is strictly prohibited. All rights reserved.</p>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install StatiCrypt
+        run: npm install -g staticrypt
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site
+          cp -r *.html protected _site/ 2>/dev/null || true
+          # Shared docs: copy into both protected folders so each gets encrypted with its own key
+          cp _site/protected/integration/integration-requirements.html _site/protected/operations/integration-requirements.html
+
+      - name: Encrypt integration docs
+        run: |
+          for file in _site/protected/integration/*.html; do
+            [ -f "$file" ] || continue
+            staticrypt "$file" \
+              -p "$INTEGRATION_KEY" \
+              --short \
+              --template-title "Lemonflow — Technical Documentation" \
+              --template-instructions "This document is restricted to technical integration partners.<br><br>Please enter your tech key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
+              --template-color-primary "#1a7a52" \
+              --template-color-secondary "#f0faf6" \
+              --remember 30 \
+              -o "$file"
+          done
+        env:
+          INTEGRATION_KEY: ${{ secrets.LEMONFLOW_DOCS_TECH_KEY }}
+
+      - name: Encrypt operations docs
+        run: |
+          for file in _site/protected/operations/*.html; do
+            [ -f "$file" ] || continue
+            staticrypt "$file" \
+              -p "$OPERATIONS_KEY" \
+              --short \
+              --template-title "Lemonflow — Operations Documentation" \
+              --template-instructions "This document is restricted to operations partners.<br><br>Please enter your operations key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
+              --template-color-primary "#880e4f" \
+              --template-color-secondary "#fce4ec" \
+              --remember 30 \
+              -o "$file"
+          done
+        env:
+          OPERATIONS_KEY: ${{ secrets.LEMONFLOW_DOCS_OPERATIONS_KEY }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

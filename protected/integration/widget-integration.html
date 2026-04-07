@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Widget — Integration Guide</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 940px; margin: 0 auto; padding: 40px 20px; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1 { color: #1a1a1a; font-size: 26px; font-weight: 700; border-bottom: 3px solid #5ce0c2; padding-bottom: 12px; margin-bottom: 5px; }
+        .meta { color: #666; margin-bottom: 30px; font-size: 13px; }
+        .meta strong { color: #1a1a1a; }
+        h2 { color: #1a1a1a; margin-top: 40px; font-size: 20px; font-weight: 700; border-bottom: 2px solid #5ce0c2; padding-bottom: 8px; }
+        h3 { color: #1a1a1a; margin-top: 28px; font-size: 15px; font-weight: 700; }
+        h4 { color: #1a1a1a; margin-top: 20px; font-size: 14px; font-weight: 700; }
+        p, li { font-size: 13.5px; line-height: 1.55; }
+        ul, ol { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        li strong { color: #1a1a1a; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f5f5; font-weight: 700; }
+        .section-divider { border: none; border-top: 1px solid #e0e0e0; margin: 35px 0; }
+        .header-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logo { height: 36px; width: auto; }
+        code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+        pre { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; margin: 12px 0; font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; line-height: 1.5; overflow-x: auto; white-space: pre; }
+        pre code { background: none; padding: 0; }
+        .note { background: #f8f9fa; border-left: 3px solid #5ce0c2; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #555; }
+        .note-warn { border-left-color: #f9a825; background: #fffde7; }
+        .note-info { border-left-color: #1565c0; background: #e3f2fd; }
+        a { color: #1565c0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 13px; color: #666; }
+        .back-link:hover { color: #5ce0c2; }
+        @media print { .note { break-inside: avoid; } table { break-inside: avoid; } pre { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+<a href="../../" class="back-link">&larr; Back to documentation</a>
+
+<div class="header-with-logo">
+    <div>
+        <h1>Chat Widget &mdash; Integration Guide</h1>
+    </div>
+    <svg class="logo" viewBox="0 0 600 110" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_103)"><path d="M44.6391 69.7681C39.6456 65.9572 36.4121 60.4211 35.5373 54.1741C33.0328 36.2433 17.589 23.3101 0.109375 23.6446V35.4591C11.8198 35.1245 22.2076 43.7867 23.8894 55.8155C25.9566 73.0772 42.0877 87.0089 59.3278 86.3502V74.5305C54.0636 74.6873 48.9296 73.0406 44.6443 69.7681H44.6391Z" fill="#1D1D1D"/><path d="M12.2363 57.4622C11.5334 51.5759 5.99321 46.8292 0.109374 47.284C-0.369664 55.0418 0.76024 63.1969 3.36371 70.5992C11.0856 93.7577 34.9958 110.716 59.3278 109.984V98.1593C36.4017 98.9174 14.9856 80.4115 12.2363 57.4622Z" fill="#1D1D1D"/><path d="M58.8488 50.8806C58.2968 46.9651 57.3596 43.1124 56.0579 39.3851C47.758 15.7823 25.2328 -0.287508 0.109375 1.22481e-05V11.8145C23.3583 11.4747 43.858 28.6945 47.1957 52.5221C48.0444 58.6541 53.4232 63.0663 59.3278 62.7003C59.5569 58.7953 59.4007 54.838 58.8488 50.8806Z" fill="#1D1D1D"/><path d="M159.009 37.9579C142.763 37.9579 132.87 48.9359 132.87 65.5598C132.87 82.1837 142.659 93.8936 159.321 93.8936C173.068 93.8936 180.982 86.9932 182.961 77.0606H170.985C169.423 81.3473 165.778 83.8566 159.425 83.8566C149.845 83.8566 144.846 77.7925 144.534 66.919H183.69V62.946C183.377 49.145 174.942 37.9579 159.009 37.9579ZM145.054 58.1366C146.408 51.968 150.574 47.3676 158.905 47.3676C166.715 47.3676 170.881 52.1771 171.61 58.1366H145.054Z" fill="#1D1D1D"/><path d="M253.775 37.9579C247.215 37.9579 242.32 40.1535 239.092 44.4402H236.593C233.781 40.1535 229.199 37.9579 222.846 37.9579C216.494 37.9579 212.12 40.0489 209.516 44.1265H207.017V39.3171H195.666V92.5344H207.434V63.5733C207.434 55.3137 210.974 48.5177 218.785 48.5177C225.033 48.5177 227.845 52.8044 227.845 60.6458V92.5344H239.613V62.2141C239.613 54.2681 243.466 48.5177 250.86 48.5177C257.212 48.5177 259.92 52.5953 259.92 60.5413V92.5344H271.687V58.5548C271.687 46.0085 266.168 37.9579 253.775 37.9579Z" fill="#1D1D1D"/><path d="M309.802 37.9579C293.14 37.9579 283.038 49.6678 283.038 65.8735C283.038 82.0792 293.14 93.8936 309.802 93.8936C326.464 93.8936 336.565 82.1837 336.565 65.8735C336.565 49.5632 326.464 37.9579 309.802 37.9579ZM309.802 83.8566C299.492 83.8566 294.806 75.3878 294.806 65.8735C294.806 56.3592 299.492 47.995 309.802 47.995C320.111 47.995 324.798 56.5683 324.798 65.8735C324.798 75.1787 320.111 83.8566 309.802 83.8566Z" fill="#1D1D1D"/><path d="M377.804 37.9579C370.723 37.9579 365.516 40.3626 362.496 44.4402H359.997V39.3171H348.646V92.5344H360.413V64.0961C360.413 55.7319 365.724 48.5177 374.159 48.5177C381.97 48.5177 385.927 52.9089 385.927 61.5868V92.5344H397.695V59.2867C397.695 46.0085 391.03 37.9579 377.804 37.9579Z" fill="#1D1D1D"/><path d="M498.36 37.8376C481.698 37.8376 471.597 49.5476 471.597 65.7532C471.597 81.9589 481.698 93.7734 498.36 93.7734C515.022 93.7734 525.124 82.0635 525.124 65.7532C525.124 49.443 515.022 37.8376 498.36 37.8376ZM498.36 83.7363C488.051 83.7363 483.364 75.2676 483.364 65.7532C483.364 56.2389 488.051 47.8747 498.36 47.8747C508.67 47.8747 513.356 56.448 513.356 65.7532C513.356 75.0584 508.67 83.7363 498.36 83.7363Z" fill="#1D1D1D"/><path d="M588.857 39.1968L583.546 78.8223H581.046L573.444 55.1934H560.323L552.617 78.7177H550.117L544.702 39.1968H533.455L540.849 92.4142H556.99L565.53 66.4851H568.029L576.464 92.4142H592.502L600 39.1968H588.857Z" fill="#1D1D1D"/><path d="M437.304 16.1063C423.1 16.1063 415.086 25.0717 415.086 38.8204V39.317H406.651V49.3541H415.086V92.5344H426.854V49.3541H440.704V39.317H426.854V38.8204C426.854 31.486 429.9 26.6975 437.304 26.6975C444.708 26.6975 447.754 31.486 447.754 38.8204V92.409H459.522V38.8204C459.522 25.0717 451.509 16.1063 437.304 16.1063Z" fill="#1D1D1D"/><path d="M112.277 75.4923V16.5925H100.509V76.0151C100.509 88.666 108.216 93.8936 120.191 93.8936H124.045V83.8566H120.296C114.36 83.8566 112.277 79.9881 112.277 75.4923Z" fill="#1D1D1D"/></g><defs><clipPath id="clip0_1_103"><rect width="600" height="110" fill="white"/></clipPath></defs></svg>
+</div>
+<div class="meta">
+    April 2026
+</div>
+
+<div class="note">
+    This guide provides everything you need to integrate the Lemonflow chat widget into your website or mobile application with just two lines of code.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 1. Basic Integration                         -->
+<!-- =========================================== -->
+
+<h2>1. Basic Integration</h2>
+
+<p>To add the chat widget to your website or mobile application, place the following two lines of code just before the closing <code>&lt;/body&gt;</code> tag of your HTML page.</p>
+
+<pre><code>&lt;!-- Add this custom element where you want the widget to be anchored --&gt;
+&lt;lemonflow-chat
+    company="YOUR_COMPANY_ID"
+    public-key="YOUR_PUBLIC_KEY"&gt;
+&lt;/lemonflow-chat&gt;
+
+&lt;!-- Add this script tag to load the widget --&gt;
+&lt;script src="https://chat.lemonflow.ai/widget.js" async&gt;&lt;/script&gt;</code></pre>
+
+<div class="note note-warn">
+    <strong>Important:</strong> Replace <code>YOUR_COMPANY_ID</code> and <code>YOUR_PUBLIC_KEY</code> with the credentials provided to you by Lemonflow. These credentials are unique to your organization and required for authentication.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 2. Customization Options                     -->
+<!-- =========================================== -->
+
+<h2>2. Customization Options</h2>
+
+<p>You can customize the widget&rsquo;s appearance by adding attributes to the <code>&lt;lemonflow-chat&gt;</code> element.</p>
+
+<h3>Available Attributes</h3>
+
+<table>
+    <thead>
+        <tr><th>Attribute</th><th>Description</th><th>Default</th><th>Example Values</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>company</code></td><td><strong>Required</strong> &mdash; Your unique company identifier</td><td>&mdash;</td><td><code>"your-company"</code></td></tr>
+        <tr><td><code>public-key</code></td><td><strong>Required</strong> &mdash; Your public API key for authentication</td><td>&mdash;</td><td><code>"pk_your_key"</code></td></tr>
+        <tr><td><code>position</code></td><td>Corner of the screen where the widget will be positioned</td><td><code>"bottom-right"</code></td><td><code>"bottom-right"</code>, <code>"bottom-left"</code></td></tr>
+        <tr><td><code>width</code></td><td>Width of the chat widget</td><td><code>"400px"</code></td><td><code>"350px"</code>, <code>"450px"</code>, <code>"50%"</code></td></tr>
+        <tr><td><code>height</code></td><td>Height of the chat widget</td><td><code>"600px"</code></td><td><code>"500px"</code>, <code>"700px"</code>, <code>"80vh"</code></td></tr>
+        <tr><td><code>z-index</code></td><td>Stack order of the widget (increase if hidden behind other elements)</td><td><code>"9999"</code></td><td><code>"10000"</code>, <code>"99999"</code></td></tr>
+        <tr><td><code>launcher</code></td><td>Enables/disables bubble launcher mode</td><td><code>"disabled"</code></td><td><code>"enabled"</code>, <code>"disabled"</code></td></tr>
+        <tr><td><code>greeting</code></td><td>Text displayed next to the launcher bubble</td><td><code>"Need help?"</code></td><td><code>"Chat with us!"</code>, <code>"How can we help?"</code></td></tr>
+        <tr><td><code>branding-mode</code></td><td>Controls the widget&rsquo;s visual theme</td><td><code>"lemonflow"</code></td><td><code>"lemonflow"</code>, <code>"inherit"</code>, <code>"custom"</code></td></tr>
+        <tr><td><code>brand-colors</code></td><td>Custom brand colors (when branding-mode is <code>"custom"</code>, must include #)</td><td>&mdash;</td><td><code>{"primary": "#1100ffff", "secondary": "#00ff59ff"}</code></td></tr>
+        <tr><td><code>feedback-mode</code></td><td>Type of feedback form displayed after chat</td><td><code>"none"</code></td><td><code>"none"</code>, <code>"health"</code>, <code>"csat"</code></td></tr>
+        <tr><td><code>reset</code></td><td>Shows/hides reset button to start new conversations</td><td><code>"disabled"</code></td><td><code>"enabled"</code>, <code>"disabled"</code></td></tr>
+        <tr><td><code>full-screen-mobile</code></td><td>Enables full-screen mode on mobile devices</td><td><code>"disabled"</code></td><td><code>"enabled"</code>, <code>"disabled"</code></td></tr>
+        <tr><td><code>agent-version</code></td><td>Selects a specific agent version configured for your company</td><td><code>"default"</code></td><td><code>"default"</code>, <code>"v2"</code>, <code>"france"</code>, <code>"uk"</code></td></tr>
+        <tr><td><code>language</code></td><td>Overrides the default language setting</td><td>(uses config)</td><td><code>"en"</code>, <code>"de"</code>, <code>"fr"</code>, <code>"es"</code>, <code>"it"</code>, <code>"nl"</code></td></tr>
+        <tr><td><code>state</code></td><td>Sets initial context state for the agent</td><td>&mdash;</td><td><code>"homepage"</code>, <code>"checkout"</code>, <code>"support"</code></td></tr>
+        <tr><td><code>auto-show</code></td><td>Controls whether widget shows automatically on page load</td><td><code>"true"</code></td><td><code>"true"</code>, <code>"false"</code></td></tr>
+        <tr><td><code>charger-id-mode</code></td><td>Controls charger ID extraction for EV charging contexts</td><td><code>"disabled"</code></td><td><code>"disabled"</code>, <code>"auto"</code>, <code>"manual"</code></td></tr>
+        <tr><td><code>charger-id-value</code></td><td>Manual charger ID value (when charger-id-mode is <code>"manual"</code>)</td><td>&mdash;</td><td><code>"station-123"</code>, <code>"charger-abc"</code></td></tr>
+    </tbody>
+</table>
+
+<h3>Example: Customized Widget</h3>
+
+<p>This example places a smaller widget in the bottom-left corner with a launcher bubble and CSAT feedback.</p>
+
+<pre><code>&lt;lemonflow-chat
+    company="YOUR_COMPANY_ID"
+    public-key="YOUR_PUBLIC_KEY"
+    position="bottom-left"
+    width="350px"
+    height="500px"
+    launcher="enabled"
+    greeting="How can we help?"
+    feedback-mode="csat"
+    reset="enabled"&gt;
+&lt;/lemonflow-chat&gt;
+
+&lt;script src="https://chat.lemonflow.ai/widget.js" async&gt;&lt;/script&gt;</code></pre>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 3. JavaScript Integration                    -->
+<!-- =========================================== -->
+
+<h2>3. JavaScript Integration (postMessage API)</h2>
+
+<p>The widget can be controlled programmatically via the <code>postMessage</code> API and sends events back to your page.</p>
+
+<h3>Sending Commands to the Widget</h3>
+
+<pre><code>// Show the widget
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'show'
+}, '*');
+
+// Hide the widget
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'hide'
+}, '*');
+
+// Reset conversation
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'reset'
+}, '*');
+
+// Update state/context
+window.postMessage({
+    target: 'lemonflow-widget',
+    command: 'update',
+    state: 'product_page'
+}, '*');</code></pre>
+
+<h3>Helper Object for Clean Code</h3>
+
+<pre><code>const LemonflowControl = {
+    show: () =&gt; window.postMessage({ target: 'lemonflow-widget', command: 'show' }, '*'),
+    hide: () =&gt; window.postMessage({ target: 'lemonflow-widget', command: 'hide' }, '*'),
+    reset: () =&gt; window.postMessage({ target: 'lemonflow-widget', command: 'reset' }, '*'),
+    updateState: (state) =&gt; window.postMessage({ target: 'lemonflow-widget', command: 'update', state }, '*')
+};
+
+// Usage:
+LemonflowControl.show();
+LemonflowControl.updateState('checkout');</code></pre>
+
+<h3>Listening for Events from the Widget</h3>
+
+<pre><code>window.addEventListener('message', function(event) {
+    const data = event.data;
+
+    switch (data.event) {
+        case 'chat:initialized':
+            console.log('Lemonflow Chat is initialized and ready!');
+            break;
+        case 'chat:started':
+            console.log('User started chatting:', data.firstUserMessage);
+            break;
+        case 'chat:ended':
+            console.log('Chat session ended. Reason:', data.reason);
+            break;
+        case 'chat:error':
+            console.error('An error occurred in the chat widget:', data.error);
+            break;
+        case 'chat:resize':
+            console.log('Chat resized. New height:', data.height);
+            break;
+    }
+});</code></pre>
+
+<h3>Events Sent by the Widget</h3>
+
+<h4>Chat Events</h4>
+
+<table>
+    <thead>
+        <tr><th>Event</th><th>Description</th><th>Data Properties</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>chat:initialized</code></td><td>Widget successfully initialized and ready</td><td><code>data.callId</code> (string): Unique session identifier</td></tr>
+        <tr><td><code>chat:started</code></td><td>User sends their first message</td><td><code>data.callId</code> (string): Session ID<br><code>data.firstUserMessage</code> (string): User&rsquo;s first message</td></tr>
+        <tr><td><code>chat:ended</code></td><td>Chat session terminated</td><td><code>data.reason</code> (string): Why the chat ended</td></tr>
+        <tr><td><code>chat:error</code></td><td>Critical error occurred within the widget</td><td><code>data.error</code> (string): Error description</td></tr>
+        <tr><td><code>chat:resize</code></td><td>Internal content height changed</td><td><code>data.height</code> (number): New height in pixels</td></tr>
+    </tbody>
+</table>
+
+<h4>Widget Control Events</h4>
+
+<table>
+    <thead>
+        <tr><th>Event</th><th>Description</th><th>Data Properties</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><code>widget:shown</code></td><td>Widget became visible via <code>show</code> command</td><td>&mdash;</td></tr>
+        <tr><td><code>widget:hidden</code></td><td>Widget was hidden via <code>hide</code> command</td><td>&mdash;</td></tr>
+        <tr><td><code>widget:reset</code></td><td>Conversation was reset via <code>reset</code> command</td><td>&mdash;</td></tr>
+        <tr><td><code>widget:state_updated</code></td><td>State was updated via <code>update</code> command</td><td><code>data.state</code> (string): New state</td></tr>
+    </tbody>
+</table>
+
+<h3>Example: Dynamic Widget Control</h3>
+
+<pre><code>// Show widget when user needs help
+if (userStuckOnPage) {
+    LemonflowControl.show();
+    LemonflowControl.updateState('help_needed');
+}
+
+// Hide widget on admin pages
+if (window.location.pathname.startsWith('/admin')) {
+    LemonflowControl.hide();
+}
+
+// Update context on navigation
+window.addEventListener('popstate', () =&gt; {
+    const page = window.location.pathname.split('/')[1] || 'homepage';
+    LemonflowControl.updateState(page);
+});</code></pre>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 4. Accessibility                             -->
+<!-- =========================================== -->
+
+<h2>4. Accessibility Features</h2>
+
+<p>The Lemonflow chat widget is designed to be accessible and compliant with <strong>WCAG 2.1 Level AA</strong> standards.</p>
+
+<h3>Key Accessibility Features</h3>
+
+<ul>
+    <li><strong>Keyboard Navigation</strong> &mdash; All interactive elements accessible via Tab key and activated with Enter/Space</li>
+    <li><strong>Screen Reader Support</strong> &mdash; Proper ARIA labels and roles for assistive technologies</li>
+    <li><strong>Focus Management</strong> &mdash; Clear visual focus indicators for keyboard users</li>
+    <li><strong>Alternative Text</strong> &mdash; Descriptive labels for icons and images</li>
+    <li><strong>Live Regions</strong> &mdash; Screen readers announce new messages and status changes</li>
+</ul>
+
+<h3>Keyboard Navigation Guide</h3>
+
+<p>To activate keyboard mode, click anywhere on the chat widget to bring it into focus, then press Tab to navigate.</p>
+
+<h4>Navigation Flow</h4>
+
+<ol>
+    <li><strong>Reset button</strong> (if enabled)</li>
+    <li><strong>Close button</strong></li>
+    <li><strong>Message input field</strong></li>
+    <li><strong>Send button</strong></li>
+</ol>
+
+<h4>Keyboard Controls</h4>
+
+<table>
+    <thead>
+        <tr><th>Key</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>Tab</strong></td><td>Move forward through interactive elements</td></tr>
+        <tr><td><strong>Shift + Tab</strong></td><td>Move backward through elements</td></tr>
+        <tr><td><strong>Enter</strong></td><td>Activate the currently focused button</td></tr>
+        <tr><td><strong>Space</strong></td><td>Activate buttons (alternative to Enter)</td></tr>
+    </tbody>
+</table>
+
+<h4>Visual Focus Indicators</h4>
+
+<ul>
+    <li><strong>Active focus</strong> &mdash; Black outline appears around the currently focused element</li>
+    <li><strong>Clear feedback</strong> &mdash; Each interactive element displays a prominent black border when focused</li>
+    <li><strong>Consistent styling</strong> &mdash; Focus indicators maintain the same appearance across all elements</li>
+</ul>
+
+<h3>High Contrast Support</h3>
+
+<p>The widget automatically adapts to system high contrast settings and maintains sufficient color contrast ratios for all text and interactive elements.</p>
+
+<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0 20px 0;">
+<p style="color: #bbb; font-size: 11px; text-align: center; line-height: 1.5;">This document contains proprietary and confidential information belonging to Lemonflow Technologies GmbH. Any reproduction, distribution, or use of this material without the explicit permission of Lemonflow Technologies GmbH is strictly prohibited. All rights reserved.</p>
+
+</body>
+</html>

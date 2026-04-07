@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCPP Logs — API Guide</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 940px; margin: 0 auto; padding: 40px 20px; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1 { color: #1a1a1a; font-size: 26px; font-weight: 700; border-bottom: 3px solid #5ce0c2; padding-bottom: 12px; margin-bottom: 5px; }
+        .meta { color: #666; margin-bottom: 30px; font-size: 13px; }
+        .meta strong { color: #1a1a1a; }
+        h2 { color: #1a1a1a; margin-top: 40px; font-size: 20px; font-weight: 700; border-bottom: 2px solid #5ce0c2; padding-bottom: 8px; }
+        h3 { color: #1a1a1a; margin-top: 28px; font-size: 15px; font-weight: 700; }
+        p, li { font-size: 13.5px; line-height: 1.55; }
+        ul, ol { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        li strong { color: #1a1a1a; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f5f5; font-weight: 700; }
+        .section-divider { border: none; border-top: 1px solid #e0e0e0; margin: 35px 0; }
+        .header-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logo { height: 36px; width: auto; }
+        .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-reference { background: #e3f2fd; color: #1565c0; }
+        code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+        pre { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; margin: 12px 0; font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; line-height: 1.5; overflow-x: auto; white-space: pre; }
+        pre .comment { color: #666; }
+        pre .key { color: #1565c0; }
+        pre .string { color: #2e7d32; }
+        pre .number { color: #d32f2f; }
+        .note { background: #f8f9fa; border-left: 3px solid #5ce0c2; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #555; }
+        .note-warn { border-left-color: #f9a825; background: #fffde7; }
+        .note-info { border-left-color: #1565c0; background: #e3f2fd; }
+        .note-success { border-left-color: #2e7d32; background: #f1f8e9; }
+        .bp-item { margin-bottom: 16px; }
+        .bp-item > strong:first-child { display: block; margin-bottom: 2px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 13px; color: #666; text-decoration: none; }
+        .back-link:hover { color: #5ce0c2; }
+        @media print { .note { break-inside: avoid; } table { break-inside: avoid; } pre { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+<a href="../../" class="back-link">&larr; Back to documentation</a>
+
+<div class="header-with-logo">
+    <div>
+        <h1>OCPP Logs &mdash; API Guide</h1>
+    </div>
+    <svg class="logo" viewBox="0 0 600 110" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_103)"><path d="M44.6391 69.7681C39.6456 65.9572 36.4121 60.4211 35.5373 54.1741C33.0328 36.2433 17.589 23.3101 0.109375 23.6446V35.4591C11.8198 35.1245 22.2076 43.7867 23.8894 55.8155C25.9566 73.0772 42.0877 87.0089 59.3278 86.3502V74.5305C54.0636 74.6873 48.9296 73.0406 44.6443 69.7681H44.6391Z" fill="#1D1D1D"/><path d="M12.2363 57.4622C11.5334 51.5759 5.99321 46.8292 0.109374 47.284C-0.369664 55.0418 0.76024 63.1969 3.36371 70.5992C11.0856 93.7577 34.9958 110.716 59.3278 109.984V98.1593C36.4017 98.9174 14.9856 80.4115 12.2363 57.4622Z" fill="#1D1D1D"/><path d="M58.8488 50.8806C58.2968 46.9651 57.3596 43.1124 56.0579 39.3851C47.758 15.7823 25.2328 -0.287508 0.109375 1.22481e-05V11.8145C23.3583 11.4747 43.858 28.6945 47.1957 52.5221C48.0444 58.6541 53.4232 63.0663 59.3278 62.7003C59.5569 58.7953 59.4007 54.838 58.8488 50.8806Z" fill="#1D1D1D"/><path d="M159.009 37.9579C142.763 37.9579 132.87 48.9359 132.87 65.5598C132.87 82.1837 142.659 93.8936 159.321 93.8936C173.068 93.8936 180.982 86.9932 182.961 77.0606H170.985C169.423 81.3473 165.778 83.8566 159.425 83.8566C149.845 83.8566 144.846 77.7925 144.534 66.919H183.69V62.946C183.377 49.145 174.942 37.9579 159.009 37.9579ZM145.054 58.1366C146.408 51.968 150.574 47.3676 158.905 47.3676C166.715 47.3676 170.881 52.1771 171.61 58.1366H145.054Z" fill="#1D1D1D"/><path d="M253.775 37.9579C247.215 37.9579 242.32 40.1535 239.092 44.4402H236.593C233.781 40.1535 229.199 37.9579 222.846 37.9579C216.494 37.9579 212.12 40.0489 209.516 44.1265H207.017V39.3171H195.666V92.5344H207.434V63.5733C207.434 55.3137 210.974 48.5177 218.785 48.5177C225.033 48.5177 227.845 52.8044 227.845 60.6458V92.5344H239.613V62.2141C239.613 54.2681 243.466 48.5177 250.86 48.5177C257.212 48.5177 259.92 52.5953 259.92 60.5413V92.5344H271.687V58.5548C271.687 46.0085 266.168 37.9579 253.775 37.9579Z" fill="#1D1D1D"/><path d="M309.802 37.9579C293.14 37.9579 283.038 49.6678 283.038 65.8735C283.038 82.0792 293.14 93.8936 309.802 93.8936C326.464 93.8936 336.565 82.1837 336.565 65.8735C336.565 49.5632 326.464 37.9579 309.802 37.9579ZM309.802 83.8566C299.492 83.8566 294.806 75.3878 294.806 65.8735C294.806 56.3592 299.492 47.995 309.802 47.995C320.111 47.995 324.798 56.5683 324.798 65.8735C324.798 75.1787 320.111 83.8566 309.802 83.8566Z" fill="#1D1D1D"/><path d="M377.804 37.9579C370.723 37.9579 365.516 40.3626 362.496 44.4402H359.997V39.3171H348.646V92.5344H360.413V64.0961C360.413 55.7319 365.724 48.5177 374.159 48.5177C381.97 48.5177 385.927 52.9089 385.927 61.5868V92.5344H397.695V59.2867C397.695 46.0085 391.03 37.9579 377.804 37.9579Z" fill="#1D1D1D"/><path d="M498.36 37.8376C481.698 37.8376 471.597 49.5476 471.597 65.7532C471.597 81.9589 481.698 93.7734 498.36 93.7734C515.022 93.7734 525.124 82.0635 525.124 65.7532C525.124 49.443 515.022 37.8376 498.36 37.8376ZM498.36 83.7363C488.051 83.7363 483.364 75.2676 483.364 65.7532C483.364 56.2389 488.051 47.8747 498.36 47.8747C508.67 47.8747 513.356 56.448 513.356 65.7532C513.356 75.0584 508.67 83.7363 498.36 83.7363Z" fill="#1D1D1D"/><path d="M588.857 39.1968L583.546 78.8223H581.046L573.444 55.1934H560.323L552.617 78.7177H550.117L544.702 39.1968H533.455L540.849 92.4142H556.99L565.53 66.4851H568.029L576.464 92.4142H592.502L600 39.1968H588.857Z" fill="#1D1D1D"/><path d="M437.304 16.1063C423.1 16.1063 415.086 25.0717 415.086 38.8204V39.317H406.651V49.3541H415.086V92.5344H426.854V49.3541H440.704V39.317H426.854V38.8204C426.854 31.486 429.9 26.6975 437.304 26.6975C444.708 26.6975 447.754 31.486 447.754 38.8204V92.409H459.522V38.8204C459.522 25.0717 451.509 16.1063 437.304 16.1063Z" fill="#1D1D1D"/><path d="M112.277 75.4923V16.5925H100.509V76.0151C100.509 88.666 108.216 93.8936 120.191 93.8936H124.045V83.8566H120.296C114.36 83.8566 112.277 79.9881 112.277 75.4923Z" fill="#1D1D1D"/></g><defs><clipPath id="clip0_1_103"><rect width="600" height="110" fill="white"/></clipPath></defs></svg>
+</div>
+<div class="meta">
+    April 2026
+</div>
+
+<div class="note">
+    This document elaborates on the <strong>OCPP Endpoint</strong> from the <em>Lemonflow Integration Requirements</em> overview. It provides best practices based on patterns we&rsquo;ve seen across 15+ CPMS integrations, along with typical API structures and examples to guide implementation. The format is flexible &mdash; we adapt to whatever your existing APIs look like.
+</div>
+
+<!-- =========================================== -->
+<!-- Contents                                     -->
+<!-- =========================================== -->
+
+<h2>Contents</h2>
+
+<ol>
+    <li><a href="#what-we-use" style="text-decoration: none; color: #1565c0;">What We Use OCPP Logs For</a></li>
+    <li><a href="#best-practices" style="text-decoration: none; color: #1565c0;">Best Practices</a></li>
+    <li><a href="#typical-api" style="text-decoration: none; color: #1565c0;">Typical API Structure</a></li>
+    <li><a href="#examples" style="text-decoration: none; color: #1565c0;">Request &amp; Response Examples</a></li>
+    <li><a href="#authentication" style="text-decoration: none; color: #1565c0;">Authentication</a></li>
+    <li><a href="#summary" style="text-decoration: none; color: #1565c0;">Quick Reference Summary</a></li>
+</ol>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 1. What We Use OCPP Logs For                 -->
+<!-- =========================================== -->
+
+<h2 id="what-we-use">1. What We Use OCPP Logs For</h2>
+
+<p>OCPP logs are the raw protocol messages exchanged between chargers and the CPMS &mdash; heartbeats, status notifications, meter values, error codes, transaction events, and more. We use these for <strong>real-time diagnostics during support calls</strong>. They let the AI agent understand what the charger is actually doing and provide accurate troubleshooting guidance to the end user.</p>
+
+<h3>Key OCPP messages we look for</h3>
+
+<table>
+    <thead>
+        <tr><th>OCPP Message</th><th>What It Tells Us</th><th>Example Use</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>StatusNotification</strong></td>
+            <td>Current charger/connector state and error codes</td>
+            <td>&ldquo;Connector 2 is in Faulted state with GroundFailure error&rdquo;</td>
+        </tr>
+        <tr>
+            <td><strong>MeterValues</strong></td>
+            <td>Energy delivery, power readings, SoC</td>
+            <td>&ldquo;The charger is delivering 22 kW&rdquo; or &ldquo;Power dropped to 0 kW 5 minutes ago&rdquo;</td>
+        </tr>
+        <tr>
+            <td><strong>StartTransaction / StopTransaction</strong></td>
+            <td>Session lifecycle</td>
+            <td>&ldquo;Your session started at 08:12 and is still active&rdquo;</td>
+        </tr>
+        <tr>
+            <td><strong>Heartbeat</strong></td>
+            <td>Connectivity</td>
+            <td>&ldquo;The charger last communicated 3 minutes ago&rdquo; vs. &ldquo;The charger has been offline since yesterday&rdquo;</td>
+        </tr>
+        <tr>
+            <td><strong>BootNotification</strong></td>
+            <td>Charger restarts</td>
+            <td>&ldquo;The charger restarted at 10:45 &mdash; this may have interrupted your session&rdquo;</td>
+        </tr>
+        <tr>
+            <td><strong>DiagnosticsStatusNotification</strong></td>
+            <td>Firmware/diagnostic activity</td>
+            <td>Identifying if maintenance activity is affecting availability</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note note-info">
+    <strong>The more complete the logs, the more accurate the AI agent&rsquo;s troubleshooting.</strong> Raw, unfiltered OCPP data is ideal &mdash; we handle the parsing and interpretation on our side. Both OCPP 1.6 and OCPP 2.0.1 message formats are supported.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 2. Best Practices                            -->
+<!-- =========================================== -->
+
+<h2 id="best-practices">2. Best Practices</h2>
+
+<p>Based on what we&rsquo;ve seen across 15+ CPMS integrations, here are the patterns that work best for OCPP log endpoints:</p>
+
+<table>
+    <thead>
+        <tr><th style="width: 25%;">Practice</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Time-based queries</strong><br><span style="color: #888; font-size: 11px;">(not count-based)</span></td>
+            <td>The endpoint should accept <code>from</code> and <code>to</code> timestamps (ISO 8601 with timezone) and return all OCPP messages within that window. This avoids blind spots that can occur with &ldquo;latest N messages&rdquo; style endpoints. Supporting at least 24 hours per query is useful; ~72 hours is ideal.</td>
+        </tr>
+        <tr>
+            <td><strong>Generous page sizes</strong></td>
+            <td>~1,000 records per page works well. A typical ~6-hour window produces ~300&ndash;500 messages, so this often allows retrieval in a single request. Cursor-based pagination is most reliable (e.g. <code>next_cursor</code> token). Offset/limit also works if there&rsquo;s a clear &ldquo;has more&rdquo; indicator.</td>
+        </tr>
+        <tr>
+            <td><strong>Filtering &amp; batch</strong></td>
+            <td>Ideally queryable by EVSE ID, charger ID, and/or location ID. Batch support (up to ~20 IDs per request) is very useful &mdash; we often poll the charger a customer is at plus 2&ndash;3 nearby chargers for context.</td>
+        </tr>
+        <tr>
+            <td><strong>Retention</strong></td>
+            <td>At least 72 hours minimum, ~7 days preferred for incident investigation.</td>
+        </tr>
+        <tr>
+            <td><strong>Sort order</strong></td>
+            <td>Newest first (descending) &mdash; we&rsquo;re almost always interested in the most recent activity first.</td>
+        </tr>
+        <tr>
+            <td><strong>Raw OCPP data</strong></td>
+            <td>Original OCPP message payloads, as raw and unmodified as possible. Pre-processed or summarised data can work but often loses detail important for edge-case diagnosis.</td>
+        </tr>
+        <tr>
+            <td><strong>Response time</strong></td>
+            <td>Under ~2 seconds per page. In practice, most CPMS endpoints respond in 150&ndash;400 ms.</td>
+        </tr>
+        <tr>
+            <td><strong>Rate limits</strong></td>
+            <td>~1,000 requests per minute is a common baseline. Standard HTTP <code>429</code> with <code>Retry-After</code> header if throttled.</td>
+        </tr>
+        <tr>
+            <td><strong>Authentication</strong></td>
+            <td>We support OAuth2, API keys, and custom header-based auth &mdash; whatever you already use. See <a href="#authentication">Section 5</a>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 3. Typical API Structure                     -->
+<!-- =========================================== -->
+
+<h2 id="typical-api">3. Typical API Structure</h2>
+
+<table>
+    <thead>
+        <tr><th>Parameter</th><th>Recommended</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>HTTP method</strong></td>
+            <td><code>GET</code></td>
+            <td><code>POST</code> with filter body is also common (especially for batch queries)</td>
+        </tr>
+        <tr>
+            <td><strong>Endpoint pattern</strong></td>
+            <td><code>/api/v1/stations/{id}/ocpp-logs</code></td>
+            <td>Or <code>/chargepoints/{id}/logs</code>, <code>/controllers/{id}/messages</code> &mdash; naming varies</td>
+        </tr>
+        <tr>
+            <td><strong>Time range</strong></td>
+            <td><code>from</code> + <code>to</code> (ISO 8601 with timezone)</td>
+            <td>e.g. <code>2026-04-07T06:00:00Z</code>. Alternative: <code>date_from</code>, <code>date_to</code> or <code>createdAfter</code>, <code>createdBefore</code></td>
+        </tr>
+        <tr>
+            <td><strong>Max time range</strong></td>
+            <td>At least 72 hours per query</td>
+            <td>No hard cap is ideal; ~72h is a comfortable minimum</td>
+        </tr>
+        <tr>
+            <td><strong>Pagination</strong></td>
+            <td>Cursor-based (preferred) or offset/limit</td>
+            <td>Include a <code>next_cursor</code>, <code>has_more</code>, or <code>next_page</code> indicator</td>
+        </tr>
+        <tr>
+            <td><strong>Page size</strong></td>
+            <td>Up to 1,000 per page</td>
+            <td>Configurable via <code>limit</code> or <code>per_page</code> parameter</td>
+        </tr>
+        <tr>
+            <td><strong>Sort order</strong></td>
+            <td>Newest first (descending)</td>
+            <td>Configurable is a nice-to-have, but descending default is fine</td>
+        </tr>
+        <tr>
+            <td><strong>Filtering</strong></td>
+            <td>By charger/station ID (required)</td>
+            <td>EVSE ID and connector ID filtering are useful extras. Batch (list of IDs) is a bonus.</td>
+        </tr>
+        <tr>
+            <td><strong>Data format</strong></td>
+            <td>Raw OCPP message payloads with timestamps</td>
+            <td>OCPP 1.6 or 2.0.1 &mdash; we handle both</td>
+        </tr>
+        <tr>
+            <td><strong>Retention</strong></td>
+            <td>72 hours minimum, 7 days preferred</td>
+            <td>Longer is better for incident investigation</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note">
+    <strong>What about WebSocket / streaming / Kafka?</strong> We can work with real-time event streams, but a REST endpoint with time-based queries is operationally simpler for our use case. During a support call, we typically need to look back at the last few hours of OCPP history &mdash; not just live events. A GET endpoint gives us that historical window reliably, without needing persistent connections or handling reconnection gaps. If you only have a streaming interface, we can integrate it, but it requires an initial historical backfill which adds complexity on both sides.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 4. Request & Response Examples                -->
+<!-- =========================================== -->
+
+<h2 id="examples">4. Request &amp; Response Examples</h2>
+
+<h3>4a. Basic Query</h3>
+
+<p><strong>Request</strong></p>
+<pre><span class="comment">GET /api/v1/stations/STATION-1902/ocpp-logs?from=2026-04-07T06:00:00Z&amp;to=2026-04-07T12:00:00Z&amp;limit=500</span>
+<span class="comment">Authorization: Bearer {token}</span></pre>
+
+<p><strong>Response</strong> <code>200 OK</code></p>
+<pre>{
+  <span class="key">"data"</span>: [
+    {
+      <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:58:32.412Z"</span>,
+      <span class="key">"direction"</span>: <span class="string">"charger_to_cpms"</span>,
+      <span class="key">"action"</span>: <span class="string">"StatusNotification"</span>,
+      <span class="key">"connectorId"</span>: <span class="number">2</span>,
+      <span class="key">"payload"</span>: {
+        <span class="key">"connectorId"</span>: <span class="number">2</span>,
+        <span class="key">"status"</span>: <span class="string">"Faulted"</span>,
+        <span class="key">"errorCode"</span>: <span class="string">"GroundFailure"</span>,
+        <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:58:32Z"</span>
+      }
+    },
+    {
+      <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:55:01.108Z"</span>,
+      <span class="key">"direction"</span>: <span class="string">"cpms_to_charger"</span>,
+      <span class="key">"action"</span>: <span class="string">"RemoteStopTransaction"</span>,
+      <span class="key">"payload"</span>: {
+        <span class="key">"transactionId"</span>: <span class="number">48291</span>
+      }
+    },
+    {
+      <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:55:01.842Z"</span>,
+      <span class="key">"direction"</span>: <span class="string">"charger_to_cpms"</span>,
+      <span class="key">"action"</span>: <span class="string">"RemoteStopTransaction"</span>,
+      <span class="key">"payload"</span>: {
+        <span class="key">"status"</span>: <span class="string">"Accepted"</span>
+      }
+    },
+    {
+      <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:50:00.003Z"</span>,
+      <span class="key">"direction"</span>: <span class="string">"charger_to_cpms"</span>,
+      <span class="key">"action"</span>: <span class="string">"MeterValues"</span>,
+      <span class="key">"connectorId"</span>: <span class="number">2</span>,
+      <span class="key">"payload"</span>: {
+        <span class="key">"connectorId"</span>: <span class="number">2</span>,
+        <span class="key">"transactionId"</span>: <span class="number">48291</span>,
+        <span class="key">"meterValue"</span>: [{
+          <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:50:00Z"</span>,
+          <span class="key">"sampledValue"</span>: [
+            { <span class="key">"value"</span>: <span class="string">"22100"</span>, <span class="key">"unit"</span>: <span class="string">"W"</span>, <span class="key">"measurand"</span>: <span class="string">"Power.Active.Import"</span> },
+            { <span class="key">"value"</span>: <span class="string">"14312"</span>, <span class="key">"unit"</span>: <span class="string">"Wh"</span>, <span class="key">"measurand"</span>: <span class="string">"Energy.Active.Import.Register"</span> }
+          ]
+        }]
+      }
+    },
+    {
+      <span class="key">"timestamp"</span>: <span class="string">"2026-04-07T11:45:00.001Z"</span>,
+      <span class="key">"direction"</span>: <span class="string">"charger_to_cpms"</span>,
+      <span class="key">"action"</span>: <span class="string">"Heartbeat"</span>,
+      <span class="key">"payload"</span>: {}
+    }
+  ],
+  <span class="key">"pagination"</span>: {
+    <span class="key">"total"</span>: <span class="number">347</span>,
+    <span class="key">"limit"</span>: <span class="number">500</span>,
+    <span class="key">"hasMore"</span>: false
+  }
+}</pre>
+
+<div class="note">
+    <strong>Direction field:</strong> Including message direction (<code>charger_to_cpms</code> vs. <code>cpms_to_charger</code>) is very helpful for distinguishing requests from responses. Some providers use <code>"inbound"/"outbound"</code>, <code>"request"/"response"</code>, or <code>"from_charger"/"to_charger"</code> &mdash; any convention works as long as it&rsquo;s consistent.
+</div>
+
+<h3>4b. Paginated Query (Cursor-based)</h3>
+
+<p><strong>First request</strong></p>
+<pre><span class="comment">GET /api/v1/stations/STATION-1902/ocpp-logs?from=2026-04-06T00:00:00Z&amp;to=2026-04-07T00:00:00Z&amp;limit=1000</span></pre>
+
+<p><strong>Response</strong> (with cursor for next page)</p>
+<pre>{
+  <span class="key">"data"</span>: [ <span class="comment">... 1000 messages ...</span> ],
+  <span class="key">"pagination"</span>: {
+    <span class="key">"limit"</span>: <span class="number">1000</span>,
+    <span class="key">"hasMore"</span>: true,
+    <span class="key">"nextCursor"</span>: <span class="string">"eyJsYXN0X2lkIjogMTIzNDV9"</span>
+  }
+}</pre>
+
+<p><strong>Next page</strong></p>
+<pre><span class="comment">GET /api/v1/stations/STATION-1902/ocpp-logs?from=2026-04-06T00:00:00Z&amp;to=2026-04-07T00:00:00Z&amp;limit=1000&amp;cursor=eyJsYXN0X2lkIjogMTIzNDV9</span></pre>
+
+<h3>4c. Batch Query (Optional)</h3>
+
+<p>If supported, batch queries allow us to efficiently fetch logs for a charger and its neighbours in a single request:</p>
+
+<pre><span class="comment">POST /api/v1/ocpp-logs/query</span>
+<span class="comment">Authorization: Bearer {token}</span>
+<span class="comment">Content-Type: application/json</span>
+
+{
+  <span class="key">"stationIds"</span>: [<span class="string">"STATION-1902"</span>, <span class="string">"STATION-1903"</span>, <span class="string">"STATION-1904"</span>],
+  <span class="key">"from"</span>: <span class="string">"2026-04-07T06:00:00Z"</span>,
+  <span class="key">"to"</span>: <span class="string">"2026-04-07T12:00:00Z"</span>,
+  <span class="key">"limit"</span>: <span class="number">1000</span>
+}</pre>
+
+<div class="note note-success">
+    <strong>Why batch?</strong> During a support call, if a customer reports an issue at one charger, we often check the neighbouring chargers too &mdash; it helps distinguish between a single-charger fault and a site-wide issue (e.g. power supply problem). Batch support makes this efficient.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 5. Authentication                            -->
+<!-- =========================================== -->
+
+<h2 id="authentication">5. Authentication</h2>
+
+<p>We support all standard authentication methods. Whatever you already use for your existing APIs works fine &mdash; the key is that it&rsquo;s consistent and clearly communicated.</p>
+
+<table>
+    <thead>
+        <tr><th>Method</th><th>How It Works</th><th>Prevalence</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>OAuth2 client credentials</strong></td>
+            <td>We call a token endpoint with <code>client_id</code> + <code>client_secret</code>, receive a time-limited access token, and include it as <code>Authorization: Bearer {token}</code>. We handle token refresh automatically.</td>
+            <td>Most common (~40% of integrations)</td>
+        </tr>
+        <tr>
+            <td><strong>API key</strong></td>
+            <td>Static key sent as a header (e.g. <code>Authorization: Bearer {key}</code> or a custom header like <code>X-API-Key</code>). Simplest to implement.</td>
+            <td>Common (~35%)</td>
+        </tr>
+        <tr>
+            <td><strong>JWT / M2M token</strong></td>
+            <td>Long-lived machine-to-machine token, typically provided once and valid for months. Sent as Bearer token.</td>
+            <td>Occasional (~15%)</td>
+        </tr>
+        <tr>
+            <td><strong>Custom / other</strong></td>
+            <td>Reuse of OCPI token handshake, Azure subscription keys, username/password flows &mdash; we can adapt to any mechanism.</td>
+            <td>Rare (~10%)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note note-success">
+    <strong>Bottom line:</strong> Use whatever you already have. If starting from scratch, OAuth2 client credentials or a simple API key are both excellent choices.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- Template Response                            -->
+<!-- =========================================== -->
+
+<h2>6. Template Response (Copy &amp; Paste)</h2>
+
+<p>Ready-to-send text for partners asking about our OCPP logs requirements. Copy the block below.</p>
+
+<div class="note" style="white-space: pre-line;">We need access to raw OCPP message logs per charger/station for real-time diagnostics during support calls. Here&rsquo;s a summary of what we&rsquo;re looking for.
+
+<strong>Query format</strong>
+&bull; Time-based queries with <code>from</code> and <code>to</code> timestamps (ISO 8601 with timezone)
+&bull; Filtering by charger or EVSE ID, ideally with batch support (~20 IDs per request)
+&bull; Up to ~1,000 records per page (a typical 6-hour window is ~300&ndash;500 messages)
+&bull; Cursor-based or offset/limit pagination with a clear &ldquo;has more&rdquo; indicator
+
+<strong>Data format</strong>
+&bull; Raw OCPP message payloads (OCPP 1.6 or 2.0.1) &mdash; the more complete and unmodified, the better
+&bull; Timestamps per message, ideally with direction (charger &rarr; CPMS or CPMS &rarr; charger)
+&bull; Newest-first sort order
+
+<strong>Performance</strong>
+&bull; Response time under 2 seconds per page
+&bull; Rate limit of ~1,000 requests per minute (standard 429 + Retry-After if throttled)
+
+<strong>Retention</strong>
+&bull; At least 72 hours, ideally 7 days for incident investigation
+
+<strong>Authentication</strong>
+We support OAuth2, API keys, JWT, and custom auth. Whatever you already use for your existing APIs is fine.
+
+We&rsquo;ve shared a more detailed reference document with examples. Happy to walk through it together if that would be helpful.
+</div>
+
+<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0 20px 0;">
+<p style="color: #bbb; font-size: 11px; text-align: center; line-height: 1.5;">This document contains proprietary and confidential information belonging to Lemonflow Technologies GmbH. Any reproduction, distribution, or use of this material without the explicit permission of Lemonflow Technologies GmbH is strictly prohibited. All rights reserved.</p>
+
+</body>
+</html>

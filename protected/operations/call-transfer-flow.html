@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Transfer Flow</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 940px; margin: 0 auto; padding: 40px 20px; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1 { color: #1a1a1a; font-size: 26px; font-weight: 700; border-bottom: 3px solid #5ce0c2; padding-bottom: 12px; margin-bottom: 5px; }
+        .meta { color: #666; margin-bottom: 30px; font-size: 13px; }
+        .meta strong { color: #1a1a1a; }
+        h2 { color: #1a1a1a; margin-top: 40px; font-size: 20px; font-weight: 700; border-bottom: 2px solid #5ce0c2; padding-bottom: 8px; }
+        h3 { color: #1a1a1a; margin-top: 28px; font-size: 15px; font-weight: 700; }
+        p, li { font-size: 13.5px; line-height: 1.55; }
+        ul, ol { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        li strong { color: #1a1a1a; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f5f5; font-weight: 700; }
+        .section-divider { border: none; border-top: 1px solid #e0e0e0; margin: 35px 0; }
+        .header-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logo { height: 36px; width: auto; }
+        .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-reference { background: #e3f2fd; color: #1565c0; }
+        .note { background: #f8f9fa; border-left: 3px solid #5ce0c2; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #555; }
+        .note-info { border-left-color: #1565c0; background: #e3f2fd; }
+        .note-success { border-left-color: #2e7d32; background: #f1f8e9; }
+        a { color: #1565c0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 13px; color: #666; text-decoration: none; }
+        .back-link:hover { color: #5ce0c2; }
+        .flow-diagram { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px; margin: 20px 0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; white-space: pre; }
+        .flow-diagram .label { color: #1a1a1a; font-weight: 700; }
+        .flow-diagram .customer { color: #1565c0; font-weight: 700; }
+        .flow-diagram .agent { color: #2e7d32; font-weight: 700; }
+        .flow-diagram .system { color: #d32f2f; font-weight: 700; }
+        .flow-diagram .dim { color: #999; }
+        .step-number { display: inline-block; width: 28px; height: 28px; background: #1a1a1a; color: #fff; border-radius: 50%; text-align: center; line-height: 28px; font-size: 13px; font-weight: 700; margin-right: 10px; flex-shrink: 0; }
+        .step { display: flex; align-items: flex-start; margin-bottom: 20px; }
+        .step-content { flex: 1; }
+        .step-content strong { display: block; margin-bottom: 2px; }
+        .step-content p { margin: 0; color: #555; }
+        .perspective { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px; margin-left: 8px; }
+        .perspective-customer { background: #e3f2fd; color: #1565c0; }
+        .perspective-agent { background: #e8f5e9; color: #2e7d32; }
+        @media print { .note { break-inside: avoid; } table { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+<a href="../../" class="back-link">&larr; Back to documentation</a>
+
+<div class="header-with-logo">
+    <div>
+        <h1>Call Transfer Flow</h1>
+    </div>
+    <svg class="logo" viewBox="0 0 600 110" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_103)"><path d="M44.6391 69.7681C39.6456 65.9572 36.4121 60.4211 35.5373 54.1741C33.0328 36.2433 17.589 23.3101 0.109375 23.6446V35.4591C11.8198 35.1245 22.2076 43.7867 23.8894 55.8155C25.9566 73.0772 42.0877 87.0089 59.3278 86.3502V74.5305C54.0636 74.6873 48.9296 73.0406 44.6443 69.7681H44.6391Z" fill="#1D1D1D"/><path d="M12.2363 57.4622C11.5334 51.5759 5.99321 46.8292 0.109374 47.284C-0.369664 55.0418 0.76024 63.1969 3.36371 70.5992C11.0856 93.7577 34.9958 110.716 59.3278 109.984V98.1593C36.4017 98.9174 14.9856 80.4115 12.2363 57.4622Z" fill="#1D1D1D"/><path d="M58.8488 50.8806C58.2968 46.9651 57.3596 43.1124 56.0579 39.3851C47.758 15.7823 25.2328 -0.287508 0.109375 1.22481e-05V11.8145C23.3583 11.4747 43.858 28.6945 47.1957 52.5221C48.0444 58.6541 53.4232 63.0663 59.3278 62.7003C59.5569 58.7953 59.4007 54.838 58.8488 50.8806Z" fill="#1D1D1D"/><path d="M159.009 37.9579C142.763 37.9579 132.87 48.9359 132.87 65.5598C132.87 82.1837 142.659 93.8936 159.321 93.8936C173.068 93.8936 180.982 86.9932 182.961 77.0606H170.985C169.423 81.3473 165.778 83.8566 159.425 83.8566C149.845 83.8566 144.846 77.7925 144.534 66.919H183.69V62.946C183.377 49.145 174.942 37.9579 159.009 37.9579ZM145.054 58.1366C146.408 51.968 150.574 47.3676 158.905 47.3676C166.715 47.3676 170.881 52.1771 171.61 58.1366H145.054Z" fill="#1D1D1D"/><path d="M253.775 37.9579C247.215 37.9579 242.32 40.1535 239.092 44.4402H236.593C233.781 40.1535 229.199 37.9579 222.846 37.9579C216.494 37.9579 212.12 40.0489 209.516 44.1265H207.017V39.3171H195.666V92.5344H207.434V63.5733C207.434 55.3137 210.974 48.5177 218.785 48.5177C225.033 48.5177 227.845 52.8044 227.845 60.6458V92.5344H239.613V62.2141C239.613 54.2681 243.466 48.5177 250.86 48.5177C257.212 48.5177 259.92 52.5953 259.92 60.5413V92.5344H271.687V58.5548C271.687 46.0085 266.168 37.9579 253.775 37.9579Z" fill="#1D1D1D"/><path d="M309.802 37.9579C293.14 37.9579 283.038 49.6678 283.038 65.8735C283.038 82.0792 293.14 93.8936 309.802 93.8936C326.464 93.8936 336.565 82.1837 336.565 65.8735C336.565 49.5632 326.464 37.9579 309.802 37.9579ZM309.802 83.8566C299.492 83.8566 294.806 75.3878 294.806 65.8735C294.806 56.3592 299.492 47.995 309.802 47.995C320.111 47.995 324.798 56.5683 324.798 65.8735C324.798 75.1787 320.111 83.8566 309.802 83.8566Z" fill="#1D1D1D"/><path d="M377.804 37.9579C370.723 37.9579 365.516 40.3626 362.496 44.4402H359.997V39.3171H348.646V92.5344H360.413V64.0961C360.413 55.7319 365.724 48.5177 374.159 48.5177C381.97 48.5177 385.927 52.9089 385.927 61.5868V92.5344H397.695V59.2867C397.695 46.0085 391.03 37.9579 377.804 37.9579Z" fill="#1D1D1D"/><path d="M498.36 37.8376C481.698 37.8376 471.597 49.5476 471.597 65.7532C471.597 81.9589 481.698 93.7734 498.36 93.7734C515.022 93.7734 525.124 82.0635 525.124 65.7532C525.124 49.443 515.022 37.8376 498.36 37.8376ZM498.36 83.7363C488.051 83.7363 483.364 75.2676 483.364 65.7532C483.364 56.2389 488.051 47.8747 498.36 47.8747C508.67 47.8747 513.356 56.448 513.356 65.7532C513.356 75.0584 508.67 83.7363 498.36 83.7363Z" fill="#1D1D1D"/><path d="M588.857 39.1968L583.546 78.8223H581.046L573.444 55.1934H560.323L552.617 78.7177H550.117L544.702 39.1968H533.455L540.849 92.4142H556.99L565.53 66.4851H568.029L576.464 92.4142H592.502L600 39.1968H588.857Z" fill="#1D1D1D"/><path d="M437.304 16.1063C423.1 16.1063 415.086 25.0717 415.086 38.8204V39.317H406.651V49.3541H415.086V92.5344H426.854V49.3541H440.704V39.317H426.854V38.8204C426.854 31.486 429.9 26.6975 437.304 26.6975C444.708 26.6975 447.754 31.486 447.754 38.8204V92.409H459.522V38.8204C459.522 25.0717 451.509 16.1063 437.304 16.1063Z" fill="#1D1D1D"/><path d="M112.277 75.4923V16.5925H100.509V76.0151C100.509 88.666 108.216 93.8936 120.191 93.8936H124.045V83.8566H120.296C114.36 83.8566 112.277 79.9881 112.277 75.4923Z" fill="#1D1D1D"/></g><defs><clipPath id="clip0_1_103"><rect width="600" height="110" fill="white"/></clipPath></defs></svg>
+</div>
+<div class="meta">
+    April 2026
+</div>
+
+<div class="note">
+    When the AI agent determines that a customer needs to speak with a human agent, it initiates a call transfer. This document explains what happens during that transfer &mdash; from both the customer&rsquo;s and the callcenter agent&rsquo;s perspective.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 1. Overview                                   -->
+<!-- =========================================== -->
+
+<h2>1. Overview</h2>
+
+<p>The transfer process is designed to ensure the human agent has full context before speaking with the customer &mdash; no cold transfers. The customer hears hold music while a support ticket is created and the agent is briefed with an AI-generated summary of the conversation.</p>
+
+<div class="flow-diagram"><span class="label">END-TO-END TRANSFER FLOW</span>
+<span class="dim">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
+
+  <span class="system">AI agent</span> decides customer needs human support
+       |
+       v
+  <span class="customer">Customer</span> hears: <span class="dim">"I&rsquo;ll transfer you now..."</span>
+       |
+       v
+  <span class="customer">Customer</span> is placed on hold with music       <span class="dim">(~15&ndash;30 seconds)</span>
+       |                                            |
+       |     <span class="system">In parallel:</span>                           |
+       |     &bull; Support ticket is created            |
+       |     &bull; Callcenter number is dialed          |
+       |     &bull; IVR navigated automatically          |
+       |       <span class="dim">(if callcenter has a menu)</span>           |
+       |                                            |
+       v                                            v
+  <span class="agent">Agent&rsquo;s phone rings</span>                     Ticket ready
+       |
+       v
+  <span class="agent">Agent</span> picks up &rarr; hears: <span class="dim">"Press 1 to hear the summary of this call"</span>
+       |
+       |&mdash;&mdash; <span class="agent">Presses 1</span> &rarr; AI summary is read aloud     <span class="dim">(~15&ndash;30 seconds)</span>
+       |&mdash;&mdash; <span class="agent">Presses 2</span> &rarr; Ticket number repeated
+       |&mdash;&mdash; <span class="agent">Presses 3</span> &rarr; Full summary repeated
+       |
+       v
+  <span class="agent">Agent presses 1</span> (again) &rarr; <span class="label">Connected to customer</span>
+       |
+       v
+  <span class="customer">Customer</span> + <span class="agent">Agent</span> in live conversation</div>
+
+<div class="note note-info">
+    <strong>Typical total transfer time:</strong> 30&ndash;60 seconds from the moment the AI decides to transfer until the customer is speaking with a human agent. This includes ticket creation, agent dialing, and the whisper summary.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 2. Customer Experience                        -->
+<!-- =========================================== -->
+
+<h2>2. What the Customer Experiences</h2>
+
+<div class="step">
+    <span class="step-number">1</span>
+    <div class="step-content">
+        <strong>Transfer announcement</strong>
+        <p>The AI agent tells the customer it will connect them with a human agent. The exact wording is customisable per company and language.</p>
+    </div>
+</div>
+
+<div class="step">
+    <span class="step-number">2</span>
+    <div class="step-content">
+        <strong>Hold music</strong>
+        <p>The customer is placed in a waiting room with hold music. The music is customisable (your own audio file or our default). During this time, the support ticket is being created and the callcenter agent is being dialed. If your callcenter has an IVR menu, we navigate it automatically on your behalf (configurable DTMF sequences).</p>
+    </div>
+</div>
+
+<div class="step">
+    <span class="step-number">3</span>
+    <div class="step-content">
+        <strong>Connected to agent</strong>
+        <p>Once the callcenter agent has heard the summary and is ready, the customer is connected. From the customer&rsquo;s perspective, the hold music stops and they&rsquo;re speaking with the agent.</p>
+    </div>
+</div>
+
+<div class="note">
+    <strong>If no agent is available:</strong> If the callcenter doesn&rsquo;t answer within the configured timeout, the customer hears a message (e.g. &ldquo;Unfortunately no agent is available at the moment. Please try again later.&rdquo;). This message is customisable. Failover to a secondary callcenter number can be configured.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 3. Agent Experience                           -->
+<!-- =========================================== -->
+
+<h2>3. What the Callcenter Agent Experiences</h2>
+
+<div class="step">
+    <span class="step-number">1</span>
+    <div class="step-content">
+        <strong>Phone rings</strong>
+        <p>The agent&rsquo;s phone rings like any other incoming call. The caller ID shows the Lemonflow transfer number (configurable).</p>
+    </div>
+</div>
+
+<div class="step">
+    <span class="step-number">2</span>
+    <div class="step-content">
+        <strong>Agent picks up &rarr; hears menu prompt</strong>
+        <p>Instead of being connected to the customer immediately, the agent hears a brief prompt: <em>&ldquo;Press 1 to hear the summary of this call.&rdquo;</em></p>
+    </div>
+</div>
+
+<div class="step">
+    <span class="step-number">3</span>
+    <div class="step-content">
+        <strong>Agent presses 1 &rarr; hears AI summary</strong>
+        <p>A text-to-speech voice reads an AI-generated summary of the conversation. This includes:</p>
+        <ul>
+            <li>The company name (e.g. &ldquo;Incoming call from [Company] customer support&rdquo;)</li>
+            <li>A concise summary of the customer&rsquo;s issue and what the AI already tried</li>
+            <li>The support ticket number (if a ticketing system is connected)</li>
+        </ul>
+    </div>
+</div>
+
+<div class="step">
+    <span class="step-number">4</span>
+    <div class="step-content">
+        <strong>Agent chooses next action</strong>
+        <p>After hearing the summary, the agent can:</p>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr><th>Key</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>Press 1</strong></td><td>Connect to the customer</td></tr>
+        <tr><td><strong>Press 2</strong></td><td>Hear the ticket number again</td></tr>
+        <tr><td><strong>Press 3</strong></td><td>Hear the full summary again</td></tr>
+    </tbody>
+</table>
+
+<div class="step" style="margin-top: 20px;">
+    <span class="step-number">5</span>
+    <div class="step-content">
+        <strong>Connected to customer</strong>
+        <p>The agent is now live with the customer. The agent has full context from the AI summary and (if applicable) the support ticket is already open in their system.</p>
+    </div>
+</div>
+
+<div class="note note-success">
+    <strong>Auto-play mode:</strong> For callcenters that prefer it, the summary can be played automatically when the agent picks up &mdash; no &ldquo;press 1&rdquo; step. The agent simply listens to the summary, then presses 1 to connect. This is a configuration option.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 4. Transfer Methods                           -->
+<!-- =========================================== -->
+
+<h2>4. Transfer Methods</h2>
+
+<p>We support two methods for dialing the callcenter. Both provide the same agent experience (whisper summary, menu, conference bridge). The choice depends on your telephony setup.</p>
+
+<table>
+    <thead>
+        <tr><th>Method</th><th>How It Works</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>PSTN</strong></td>
+            <td>We dial the callcenter&rsquo;s regular phone number. Works out of the box &mdash; no configuration needed on your side beyond providing the number.</td>
+            <td>Quick setup, no SIP infrastructure required</td>
+        </tr>
+        <tr>
+            <td><strong>SIP</strong></td>
+            <td>We connect directly to the callcenter&rsquo;s SBC/PBX via SIP. Lower latency, lower cost, and enables passing metadata (e.g. ticket ID) via SIP headers for automatic agent screen-pop.</td>
+            <td>Callcenters with SIP infrastructure who want automatic ticket pop-up</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note note-info">
+    <strong>SIP screen-pop:</strong> With SIP transfers, we can include the support ticket ID in the <code>User-to-User</code> SIP header. If your CRM/ACD supports UUI, the ticket automatically opens on the agent&rsquo;s screen when they answer &mdash; no manual lookup needed.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 5. Configuration Options                      -->
+<!-- =========================================== -->
+
+<h2>5. What&rsquo;s Configurable</h2>
+
+<p>The transfer flow is highly configurable. Below is a selection of the most commonly used settings &mdash; all can be tailored per company and per language. Contact <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a> for the full list of options.</p>
+
+<h3>Routing &amp; Failover</h3>
+
+<table>
+    <thead>
+        <tr><th>Setting</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Callcenter number(s)</strong></td>
+            <td>The phone number(s) or SIP URI(s) we dial. Multiple destinations supported (e.g. per language, per queue).</td>
+        </tr>
+        <tr>
+            <td><strong>Time-based routing</strong></td>
+            <td>Automatically route to different numbers based on time of day or day of week (e.g. daytime team vs. after-hours overflow, weekday vs. weekend).</td>
+        </tr>
+        <tr>
+            <td><strong>Failover</strong></td>
+            <td>If the primary callcenter doesn&rsquo;t answer within the timeout, automatically try a secondary number.</td>
+        </tr>
+        <tr>
+            <td><strong>Agent wait timeout</strong></td>
+            <td>How long the customer waits before the &ldquo;no agent available&rdquo; message plays. Configurable per destination.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Customer Experience</h3>
+
+<table>
+    <thead>
+        <tr><th>Setting</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Hold music</strong></td>
+            <td>Custom audio file for the customer while waiting. Can be your own branded music or our default.</td>
+        </tr>
+        <tr>
+            <td><strong>Transfer announcement</strong></td>
+            <td>The message the AI says before transferring (e.g. &ldquo;I&rsquo;ll connect you with a colleague now&rdquo;). Customisable wording per language.</td>
+        </tr>
+        <tr>
+            <td><strong>No-answer message</strong></td>
+            <td>What the customer hears if no agent is available (e.g. &ldquo;Please try again later&rdquo; or &ldquo;We&rsquo;ll call you back&rdquo;). Customisable per language.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Agent Experience</h3>
+
+<table>
+    <thead>
+        <tr><th>Setting</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Summary mode</strong></td>
+            <td>Auto-play the summary immediately when the agent answers, or prompt &ldquo;press 1&rdquo; first.</td>
+        </tr>
+        <tr>
+            <td><strong>Whisper voice &amp; language</strong></td>
+            <td>The TTS voice used for the agent whisper. Matched to the callcenter agent&rsquo;s language.</td>
+        </tr>
+        <tr>
+            <td><strong>Summary content</strong></td>
+            <td>What&rsquo;s included in the whisper: company name, conversation summary, ticket number, custom prefix/suffix text.</td>
+        </tr>
+        <tr>
+            <td><strong>IVR navigation</strong></td>
+            <td>If your callcenter has an IVR menu before reaching an agent, we can automatically navigate it (configurable DTMF sequences and pauses).</td>
+        </tr>
+        <tr>
+            <td><strong>Speech recognition</strong></td>
+            <td>Allow the agent to say &ldquo;one&rdquo; instead of pressing 1 on the keypad.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Recording &amp; Monitoring</h3>
+
+<table>
+    <thead>
+        <tr><th>Setting</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Call recording</strong></td>
+            <td>Record the conversation after transfer. Dual-channel supported (customer + agent on separate audio tracks).</td>
+        </tr>
+        <tr>
+            <td><strong>Transfer outcome logging</strong></td>
+            <td>Track whether the transfer was successful, agent didn&rsquo;t answer, or customer hung up during hold.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note">
+    This is not an exhaustive list. The transfer flow supports many additional configuration options. Contact <a href="mailto:tech@lemonflow.ai">tech@lemonflow.ai</a> to discuss your specific requirements.
+</div>
+
+<hr class="section-divider">
+
+<!-- =========================================== -->
+<!-- 6. Timeline                                   -->
+<!-- =========================================== -->
+
+<h2>6. Typical Timeline</h2>
+
+<table>
+    <thead>
+        <tr><th>Phase</th><th>Duration</th><th>What&rsquo;s Happening</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Transfer announcement</strong></td>
+            <td>3&ndash;5 seconds</td>
+            <td>AI tells customer it&rsquo;s transferring</td>
+        </tr>
+        <tr>
+            <td><strong>Ticket creation + dial</strong></td>
+            <td>10&ndash;20 seconds</td>
+            <td>Customer hears hold music. Ticket is created, agent is dialed (runs in parallel).</td>
+        </tr>
+        <tr>
+            <td><strong>Agent answers + whisper</strong></td>
+            <td>15&ndash;30 seconds</td>
+            <td>Agent picks up, hears menu, listens to summary</td>
+        </tr>
+        <tr>
+            <td><strong>Connected</strong></td>
+            <td>&mdash;</td>
+            <td>Customer and agent are live</td>
+        </tr>
+        <tr style="background: #f8f9fa;">
+            <td><strong>Total</strong></td>
+            <td><strong>30&ndash;60 seconds</strong></td>
+            <td>From AI decision to live conversation</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0 20px 0;">
+<p style="color: #bbb; font-size: 11px; text-align: center; line-height: 1.5;">This document contains proprietary and confidential information belonging to Lemonflow Technologies GmbH. Any reproduction, distribution, or use of this material without the explicit permission of Lemonflow Technologies GmbH is strictly prohibited. All rights reserved.</p>
+
+</body>
+</html>

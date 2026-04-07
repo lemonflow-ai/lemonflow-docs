@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Inbound — SIP Trunking Requirements</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 940px; margin: 0 auto; padding: 40px 20px; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1 { color: #1a1a1a; font-size: 26px; font-weight: 700; border-bottom: 3px solid #5ce0c2; padding-bottom: 12px; margin-bottom: 5px; }
+        .meta { color: #666; margin-bottom: 30px; font-size: 13px; }
+        .meta strong { color: #1a1a1a; }
+        h2 { color: #1a1a1a; margin-top: 40px; font-size: 20px; font-weight: 700; border-bottom: 2px solid #5ce0c2; padding-bottom: 8px; }
+        h3 { color: #1a1a1a; margin-top: 28px; font-size: 15px; font-weight: 700; }
+        p, li { font-size: 13.5px; line-height: 1.55; }
+        ul, ol { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        li strong { color: #1a1a1a; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f5f5; font-weight: 700; }
+        .section-divider { border: none; border-top: 1px solid #e0e0e0; margin: 35px 0; }
+        .header-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logo { height: 36px; width: auto; }
+        .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-reference { background: #e3f2fd; color: #1565c0; }
+        code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+        .note { background: #f8f9fa; border-left: 3px solid #5ce0c2; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #555; }
+        .note-warn { border-left-color: #f9a825; background: #fffde7; }
+        .note-info { border-left-color: #1565c0; background: #e3f2fd; }
+        .note-success { border-left-color: #2e7d32; background: #f1f8e9; }
+        a { color: #1565c0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 13px; color: #666; text-decoration: none; }
+        .back-link:hover { color: #5ce0c2; }
+        .arch-diagram { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px; margin: 20px 0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.45; overflow-x: auto; white-space: pre; color: #999; }
+        .arch-diagram .l { color: #1a1a1a; font-weight: 700; }
+        .arch-diagram .c { color: #1565c0; font-weight: 700; }
+        .arch-diagram .m { color: #2e7d32; font-weight: 700; }
+        .arch-diagram .t { color: #d32f2f; font-weight: 700; }
+        @media print { .note { break-inside: avoid; } table { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+<a href="../../" class="back-link">&larr; Back to documentation</a>
+
+<div class="header-with-logo">
+    <div>
+        <h1>Voice Inbound &mdash; SIP Trunking</h1>
+    </div>
+    <svg class="logo" viewBox="0 0 600 110" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_103)"><path d="M44.6391 69.7681C39.6456 65.9572 36.4121 60.4211 35.5373 54.1741C33.0328 36.2433 17.589 23.3101 0.109375 23.6446V35.4591C11.8198 35.1245 22.2076 43.7867 23.8894 55.8155C25.9566 73.0772 42.0877 87.0089 59.3278 86.3502V74.5305C54.0636 74.6873 48.9296 73.0406 44.6443 69.7681H44.6391Z" fill="#1D1D1D"/><path d="M12.2363 57.4622C11.5334 51.5759 5.99321 46.8292 0.109374 47.284C-0.369664 55.0418 0.76024 63.1969 3.36371 70.5992C11.0856 93.7577 34.9958 110.716 59.3278 109.984V98.1593C36.4017 98.9174 14.9856 80.4115 12.2363 57.4622Z" fill="#1D1D1D"/><path d="M58.8488 50.8806C58.2968 46.9651 57.3596 43.1124 56.0579 39.3851C47.758 15.7823 25.2328 -0.287508 0.109375 1.22481e-05V11.8145C23.3583 11.4747 43.858 28.6945 47.1957 52.5221C48.0444 58.6541 53.4232 63.0663 59.3278 62.7003C59.5569 58.7953 59.4007 54.838 58.8488 50.8806Z" fill="#1D1D1D"/><path d="M159.009 37.9579C142.763 37.9579 132.87 48.9359 132.87 65.5598C132.87 82.1837 142.659 93.8936 159.321 93.8936C173.068 93.8936 180.982 86.9932 182.961 77.0606H170.985C169.423 81.3473 165.778 83.8566 159.425 83.8566C149.845 83.8566 144.846 77.7925 144.534 66.919H183.69V62.946C183.377 49.145 174.942 37.9579 159.009 37.9579ZM145.054 58.1366C146.408 51.968 150.574 47.3676 158.905 47.3676C166.715 47.3676 170.881 52.1771 171.61 58.1366H145.054Z" fill="#1D1D1D"/><path d="M253.775 37.9579C247.215 37.9579 242.32 40.1535 239.092 44.4402H236.593C233.781 40.1535 229.199 37.9579 222.846 37.9579C216.494 37.9579 212.12 40.0489 209.516 44.1265H207.017V39.3171H195.666V92.5344H207.434V63.5733C207.434 55.3137 210.974 48.5177 218.785 48.5177C225.033 48.5177 227.845 52.8044 227.845 60.6458V92.5344H239.613V62.2141C239.613 54.2681 243.466 48.5177 250.86 48.5177C257.212 48.5177 259.92 52.5953 259.92 60.5413V92.5344H271.687V58.5548C271.687 46.0085 266.168 37.9579 253.775 37.9579Z" fill="#1D1D1D"/><path d="M309.802 37.9579C293.14 37.9579 283.038 49.6678 283.038 65.8735C283.038 82.0792 293.14 93.8936 309.802 93.8936C326.464 93.8936 336.565 82.1837 336.565 65.8735C336.565 49.5632 326.464 37.9579 309.802 37.9579ZM309.802 83.8566C299.492 83.8566 294.806 75.3878 294.806 65.8735C294.806 56.3592 299.492 47.995 309.802 47.995C320.111 47.995 324.798 56.5683 324.798 65.8735C324.798 75.1787 320.111 83.8566 309.802 83.8566Z" fill="#1D1D1D"/><path d="M377.804 37.9579C370.723 37.9579 365.516 40.3626 362.496 44.4402H359.997V39.3171H348.646V92.5344H360.413V64.0961C360.413 55.7319 365.724 48.5177 374.159 48.5177C381.97 48.5177 385.927 52.9089 385.927 61.5868V92.5344H397.695V59.2867C397.695 46.0085 391.03 37.9579 377.804 37.9579Z" fill="#1D1D1D"/><path d="M498.36 37.8376C481.698 37.8376 471.597 49.5476 471.597 65.7532C471.597 81.9589 481.698 93.7734 498.36 93.7734C515.022 93.7734 525.124 82.0635 525.124 65.7532C525.124 49.443 515.022 37.8376 498.36 37.8376ZM498.36 83.7363C488.051 83.7363 483.364 75.2676 483.364 65.7532C483.364 56.2389 488.051 47.8747 498.36 47.8747C508.67 47.8747 513.356 56.448 513.356 65.7532C513.356 75.0584 508.67 83.7363 498.36 83.7363Z" fill="#1D1D1D"/><path d="M588.857 39.1968L583.546 78.8223H581.046L573.444 55.1934H560.323L552.617 78.7177H550.117L544.702 39.1968H533.455L540.849 92.4142H556.99L565.53 66.4851H568.029L576.464 92.4142H592.502L600 39.1968H588.857Z" fill="#1D1D1D"/><path d="M437.304 16.1063C423.1 16.1063 415.086 25.0717 415.086 38.8204V39.317H406.651V49.3541H415.086V92.5344H426.854V49.3541H440.704V39.317H426.854V38.8204C426.854 31.486 429.9 26.6975 437.304 26.6975C444.708 26.6975 447.754 31.486 447.754 38.8204V92.409H459.522V38.8204C459.522 25.0717 451.509 16.1063 437.304 16.1063Z" fill="#1D1D1D"/><path d="M112.277 75.4923V16.5925H100.509V76.0151C100.509 88.666 108.216 93.8936 120.191 93.8936H124.045V83.8566H120.296C114.36 83.8566 112.277 79.9881 112.277 75.4923Z" fill="#1D1D1D"/></g><defs><clipPath id="clip0_1_103"><rect width="600" height="110" fill="white"/></clipPath></defs></svg>
+</div>
+<div class="meta">
+    April 2026
+</div>
+
+<div class="note">
+    This document covers how to route inbound calls to Lemonflow via SIP. It is intended for your <strong>telco provider or telephony team</strong>. Lemonflow supports both PSTN and SIP for inbound calls &mdash; PSTN works out of the box with no partner configuration, SIP is recommended for lower latency and lower per-minute cost. <strong>This document covers the SIP setup.</strong>
+</div>
+
+<hr class="section-divider">
+
+<h2>1. Lemonflow SIP Endpoint</h2>
+
+<table>
+    <thead>
+        <tr><th>Parameter</th><th>Value</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>SIP Domain</strong></td>
+            <td><code>lemonflow-inbound-ip.sip.twilio.com</code></td>
+            <td>IP ACL authentication (recommended)</td>
+        </tr>
+        <tr>
+            <td><strong>SIP Domain (alt)</strong></td>
+            <td><code>lemonflow-inbound.sip.twilio.com</code></td>
+            <td>Credential (digest) authentication</td>
+        </tr>
+        <tr>
+            <td><strong>SIP URI format</strong></td>
+            <td><code>sip:{DID}@lemonflow-inbound-ip.sip.twilio.com</code></td>
+            <td>DID in E.164 with leading <code>+</code></td>
+        </tr>
+        <tr>
+            <td><strong>Signaling IPs</strong></td>
+            <td><code>35.156.191.128/30</code></td>
+            <td>Frankfurt (EU &mdash; primary)</td>
+        </tr>
+        <tr>
+            <td><strong>Signaling IPs (failover)</strong></td>
+            <td><code>54.171.127.192/30</code></td>
+            <td>Ireland (EU &mdash; failover)</td>
+        </tr>
+        <tr>
+            <td><strong>Media IP range</strong></td>
+            <td><code>168.86.128.0/18</code></td>
+            <td>RTP media</td>
+        </tr>
+        <tr>
+            <td><strong>Media port range</strong></td>
+            <td><code>10000&ndash;60000</code></td>
+            <td>UDP</td>
+        </tr>
+        <tr>
+            <td><strong>SIP port</strong></td>
+            <td><code>5060</code> (UDP/TCP) / <code>5061</code> (TLS)</td>
+            <td>Both supported</td>
+        </tr>
+        <tr>
+            <td><strong>Codec</strong></td>
+            <td>G.711 (PCMU &amp; PCMA)</td>
+            <td>Both u-law and a-law</td>
+        </tr>
+        <tr>
+            <td><strong>DTMF</strong></td>
+            <td>RFC 2833</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="section-divider">
+
+<h2>2. Authentication</h2>
+
+<p>We support two methods. Both can be active simultaneously on different domains.</p>
+
+<table>
+    <thead>
+        <tr><th>Method</th><th>SIP Domain</th><th>How It Works</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>IP ACL</strong> (recommended)</td>
+            <td><code>lemonflow-inbound-ip.sip.twilio.com</code></td>
+            <td>We whitelist your telco&rsquo;s signaling gateway IPs. Only traffic from those IPs is accepted.</td>
+            <td>Telco providers with static gateway IPs</td>
+        </tr>
+        <tr>
+            <td><strong>SIP Digest</strong></td>
+            <td><code>lemonflow-inbound.sip.twilio.com</code></td>
+            <td>We create a username/password credential pair. The telco authenticates via standard SIP Digest (RFC 3261).</td>
+            <td>Providers without static IPs</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="section-divider">
+
+<h2>3. What We Need from Your Telco</h2>
+
+<div class="note note-warn">
+    <table style="margin-top: 4px; border-color: #e0c88a;">
+        <thead>
+            <tr><th>Item</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>DIDs (phone numbers)</strong></td>
+                <td>The list of phone numbers being routed to us. This is how we determine which AI agent to connect the caller to &mdash; one DID per language or region.</td>
+            </tr>
+            <tr>
+                <td><strong>Signaling gateway IPs</strong></td>
+                <td>For IP ACL authentication &mdash; the gateway IP(s) or CIDR range from which SIP INVITEs will originate. (If using Digest auth instead, we provide the credentials.)</td>
+            </tr>
+            <tr>
+                <td><strong>SIP trunk configuration</strong></td>
+                <td>Route the DIDs above to <code>lemonflow-inbound-ip.sip.twilio.com</code> (IP ACL) or <code>lemonflow-inbound.sip.twilio.com</code> (Digest).</td>
+            </tr>
+            <tr>
+                <td><strong>Firewall rules</strong></td>
+                <td>Allow outbound SIP signaling to <code>35.156.191.128/30</code> (port 5060/5061) and media to <code>168.86.128.0/18</code> (ports 10000&ndash;60000).</td>
+            </tr>
+            <tr>
+                <td><strong>Caller ID preservation</strong></td>
+                <td>Preserve the original caller&rsquo;s number in the <code>From</code> header (don&rsquo;t send <code>anonymous</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>DID in To header</strong></td>
+                <td>Send the dialed number in E.164 format in the <code>To</code> / <code>Request-URI</code>. This is how we route to the correct AI agent.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr class="section-divider">
+
+<h2>4. Call Flow</h2>
+
+<div class="arch-diagram"><span class="l">INBOUND SIP CALL FLOW</span>
+
+  Caller dials DID (e.g. the support number for Germany)
+       |
+       v
+  <span class="c">Telco gateway</span>
+       |
+       |  SIP INVITE
+       |  From: caller number
+       |  To: {DID} in E.164
+       |
+       v
+  <span class="m">Lemonflow SIP endpoint</span>  &mdash;&mdash;  IP ACL check (or digest auth)
+       |
+       |  Looks up DID &rarr; finds route
+       |  e.g. +4930... &rarr; <span class="t">AI agent (DE)</span>
+       |
+       v
+  AI agent handles call in the correct language
+</div>
+
+<hr class="section-divider">
+
+<h2>5. Security</h2>
+
+<table>
+    <thead>
+        <tr><th>Layer</th><th>Protocol</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Signaling encryption</strong></td>
+            <td>TLS 1.2+</td>
+            <td>SIP over TLS on port 5061. Encrypts all SIP signaling.</td>
+        </tr>
+        <tr>
+            <td><strong>Media encryption</strong></td>
+            <td>SRTP</td>
+            <td>Supported when both sides negotiate it.</td>
+        </tr>
+        <tr>
+            <td><strong>Authentication</strong></td>
+            <td>IP ACL or SIP Digest</td>
+            <td>IP ACL: only whitelisted IPs accepted. Digest: RFC 3261 challenge&ndash;response.</td>
+        </tr>
+        <tr>
+            <td><strong>Infrastructure</strong></td>
+            <td>EU region</td>
+            <td>All traffic processed via EU infrastructure (Frankfurt primary, Ireland failover). Underlying infrastructure is SOC 2 Type II and ISO 27001 certified.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="section-divider">
+
+<h2>6. Template Response (Copy &amp; Paste)</h2>
+
+<p>Ready-to-send text for your telco provider. Copy the block below.</p>
+
+<div class="note" style="white-space: pre-line;">We need to set up inbound SIP trunking to route calls to our AI platform. Here are the details your team will need.
+
+<strong>Our SIP endpoint</strong>
+&bull; SIP Domain: lemonflow-inbound-ip.sip.twilio.com (IP ACL) or lemonflow-inbound.sip.twilio.com (digest auth)
+&bull; SIP URI format: sip:{DID}@lemonflow-inbound-ip.sip.twilio.com (DID in E.164 with leading +)
+&bull; SIP port: 5060 (UDP/TCP) or 5061 (TLS)
+&bull; Codec: G.711 (PCMU and PCMA)
+&bull; DTMF: RFC 2833
+
+<strong>Authentication</strong>
+We support IP ACL (recommended &mdash; we whitelist your gateway IPs) or SIP Digest (we provide credentials). Both can be active simultaneously.
+
+<strong>What we need from you</strong>
+&bull; The list of DIDs (phone numbers) being routed to us &mdash; one per language or region
+&bull; For IP ACL: your signaling gateway IP(s) or CIDR range
+&bull; Confirm your firewall allows outbound to our signaling IPs (35.156.191.128/30, 54.171.127.192/30) and media range (168.86.128.0/18, ports 10000&ndash;60000)
+&bull; Preserve original caller ID in the From header
+&bull; Send the DID in E.164 format in the To / Request-URI
+
+We&rsquo;ve shared a more detailed reference document with full technical specs. Happy to set up a call if that&rsquo;s easier.
+</div>
+
+<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0 20px 0;">
+<p style="color: #bbb; font-size: 11px; text-align: center; line-height: 1.5; font-style: italic;">This document contains proprietary and confidential information belonging to Lemonflow Technologies GmbH. Any reproduction, distribution, or use of this material without the explicit permission of Lemonflow Technologies GmbH is strictly prohibited. All rights reserved.</p>
+
+</body>
+</html>
