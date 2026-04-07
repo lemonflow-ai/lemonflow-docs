@@ -47,41 +47,38 @@ jobs:
 
       - name: Encrypt integration docs
         run: |
-          for file in _site/protected/integration/*.html; do
-            [ -f "$file" ] || continue
-            staticrypt "$file" \
-              -p "$INTEGRATION_KEY" \
-              --short \
-              --template-title "Lemonflow — Technical Documentation" \
-              --template-instructions "This document is restricted to technical integration partners.<br><br>Please enter your tech key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
-              --template-color-primary "#1a7a52" \
-              --template-color-secondary "#f0faf6" \
-              --remember 30 \
-              -o "$file"
-          done
+          mkdir -p /tmp/encrypted-integration
+          staticrypt _site/protected/integration/*.html \
+            -p "$INTEGRATION_KEY" \
+            --short \
+            --template-title "Lemonflow — Technical Documentation" \
+            --template-instructions "This document is restricted to technical integration partners.<br><br>Please enter your tech key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
+            --template-color-primary "#1a7a52" \
+            --template-color-secondary "#f0faf6" \
+            --remember 30 \
+            -d /tmp/encrypted-integration
+          cp /tmp/encrypted-integration/*.html _site/protected/integration/
         env:
           INTEGRATION_KEY: ${{ secrets.LEMONFLOW_DOCS_TECH_KEY }}
 
       - name: Encrypt operations docs
         run: |
-          for file in _site/protected/operations/*.html; do
-            [ -f "$file" ] || continue
-            staticrypt "$file" \
-              -p "$OPERATIONS_KEY" \
-              --short \
-              --template-title "Lemonflow — Operations Documentation" \
-              --template-instructions "This document is restricted to operations partners.<br><br>Please enter your operations key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
-              --template-color-primary "#880e4f" \
-              --template-color-secondary "#fce4ec" \
-              --remember 30 \
-              -o "$file"
-          done
+          mkdir -p /tmp/encrypted-operations
+          staticrypt _site/protected/operations/*.html \
+            -p "$OPERATIONS_KEY" \
+            --short \
+            --template-title "Lemonflow — Operations Documentation" \
+            --template-instructions "This document is restricted to operations partners.<br><br>Please enter your operations key to continue.<br>If your key is not accepted, you may not have access to this section.<br><br>Contact <a href='mailto:tech@lemonflow.ai'>tech@lemonflow.ai</a> for credentials." \
+            --template-color-primary "#880e4f" \
+            --template-color-secondary "#fce4ec" \
+            --remember 30 \
+            -d /tmp/encrypted-operations
+          cp /tmp/encrypted-operations/*.html _site/protected/operations/
         env:
           OPERATIONS_KEY: ${{ secrets.LEMONFLOW_DOCS_OPERATIONS_KEY }}
 
       - name: Verify encryption
         run: |
-          # Check that all protected HTML files contain Staticrypt markers
           for file in _site/protected/integration/*.html _site/protected/operations/*.html; do
             [ -f "$file" ] || continue
             if ! grep -q "staticrypt" "$file"; then
